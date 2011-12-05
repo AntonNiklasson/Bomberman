@@ -39,4 +39,7 @@ public class GameWindow extends JFrame {
 		frame.add(grid);
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
 }

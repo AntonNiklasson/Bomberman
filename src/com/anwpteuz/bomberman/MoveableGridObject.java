@@ -7,28 +7,12 @@ package com.anwpteuz.bomberman;
  */
 public abstract class MoveableGridObject extends GridObject {
 	
-	protected int positionX, positionY;
-	
 	/**
 	 * @param toX Move Object to given x position
 	 * @param toY Move Object to given y position
 	 */
-	public abstract void move(int toX, int toY);
-
-	public int getX() {
-		return this.positionX;
-	}
-	
-	public void setX(int newX) {
-		this.positionX = newX;
-	}
-	
-	public int getY() {
-		return this.positionY;
-	}	
-	
-	public void setY(int newY) {
-		this.positionY = newY;
+	public void move(int toX, int toY) {
+		getGame().getGrid().moveGridObject(this, toX, toY);
 	}
 	
 	public void canMove() {
