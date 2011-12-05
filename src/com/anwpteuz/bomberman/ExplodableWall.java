@@ -8,4 +8,7 @@ public class ExplodableWall extends Wall {
 	public ExplodableWall() {
 		
 	}
+	
+	
+	
 }

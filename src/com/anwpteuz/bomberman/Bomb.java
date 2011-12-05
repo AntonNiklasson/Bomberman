@@ -2,6 +2,8 @@ package com.anwpteuz.bomberman;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+
 import javax.swing.Timer;
 
 /**
@@ -37,10 +39,29 @@ public class Bomb extends MoveableGridObject {
 	public void explode() {
 		// TODO BOOOOOOOOOOOM!
 		
-		for(int x = -1*cellRange; x <= cellRange; x++) {
-			for(int y = -1*cellRange; y <= cellRange; y++) {
+		Grid grid = getGame().getGrid();
+		
+		// Checking for ExplodableWall x-wise
+			// Left
+			for(int x = 0; x >= -cellRange; x--) {
+				LinkedList<GridObject> tile = grid.getTile(x, getY());
+				
+				for(GridObject go : tile) {
+					if(go instanceof ExplodableWall) {
+						go.
+					}
+				}
+			}
+			// Right
+			for(int x = 0; x <= cellRange; x++) {
 				
 			}
+		
+		
+		
+		// Checking for ExplodableWall y-wise
+		for(int y = -1*cellRange; y <= cellRange; y++) {
+			
 		}
 	}
 }
