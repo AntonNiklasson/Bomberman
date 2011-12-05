@@ -1,4 +1,7 @@
 package com.anwpteuz.bomberman;
+
+import java.awt.Graphics;
+
 /**
  * 
  * @author antonniklasson
@@ -34,6 +37,10 @@ public class GridObject {
 	}
 	
 	public GridObject() {
+		
+	}
+	
+	public void paint(Graphics g) {
 		
 	}
 }

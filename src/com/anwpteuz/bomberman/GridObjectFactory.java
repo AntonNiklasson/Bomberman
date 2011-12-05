@@ -12,4 +12,7 @@ public class GridObjectFactory {
 		// TODO Add bomb to GameGrid
 	}
 	
+	public static void addPlayer(int posX, int posY) {
+		
+	}
 }

@@ -34,8 +34,15 @@ public class Grid extends JPanel {
 		
 		for(int x = 0; x < COLUMNS; x++) {
 			for(int y = 0; y < ROWS; y++) {
-				g.setColor(x%2-y%2==0?Color.BLACK:Color.WHITE);
+				
+				// Fill tile with white color
+				g.setColor(Color.WHITE);
 				g.fillRect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+				
+				// Call paint on every gridobject on this tile
+				for(GridObject o : tileList[x][y]) {
+					o.paint(g);
+				}
 			}
 		}
 	}
@@ -61,8 +68,15 @@ public class Grid extends JPanel {
 	 * @param y Y destination
 	 */
 	public void moveGridObject(GridObject o, int x, int y) {
-		tileList[o.getX()][o.getY()].remove(o);
+		removeGridObject(o);
 		addGridObject(o, x, y);
 	}
 	
+	public LinkedList<GridObject> getTile(int x, int y) {
+		return tileList[x][y];
+	}
+	
+	public void removeGridObject(GridObject o) {
+		tileList[o.getX()][o.getY()].remove(o);
+	}
 }
