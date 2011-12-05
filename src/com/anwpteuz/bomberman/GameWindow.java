@@ -1,6 +1,9 @@
 package com.anwpteuz.bomberman;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class GameWindow extends JFrame {
 	
@@ -21,9 +24,6 @@ public class GameWindow extends JFrame {
 		// Stop program when closing
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		// Setting frame size
-		frame.setSize(Grid.COLUMNS*Grid.CELL_SIZE, Grid.ROWS*Grid.CELL_SIZE + barHeight); // TODO Change these values
-		
 		// Centering the frame
 		frame.setLocationRelativeTo(null);
 		
@@ -33,10 +33,17 @@ public class GameWindow extends JFrame {
 		// No resizing
 		frame.setResizable(false);
 		
+		frame.setLayout(new BorderLayout());
+		
 		// Init and add grid
 		grid = new Grid();
 		grid.setVisible(true);
+		
 		frame.add(grid);
+		
+		// Setting grid size
+		grid.setSize(Grid.COLUMNS*Grid.CELL_SIZE, Grid.ROWS*Grid.CELL_SIZE + barHeight);
+		frame.setSize(Grid.COLUMNS*Grid.CELL_SIZE, Grid.ROWS*Grid.CELL_SIZE + barHeight);
 	}
 
 }

@@ -7,8 +7,6 @@ package com.anwpteuz.bomberman;
  */
 public abstract class MoveableGridObject extends GridObject {
 	
-	protected int positionX, positionY;
-	
 	/**
 	 * @param toX Move Object to given x position
 	 * @param toY Move Object to given y position

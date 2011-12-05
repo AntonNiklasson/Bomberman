@@ -36,5 +36,11 @@ public class Bomb extends MoveableGridObject {
 	
 	public void explode() {
 		// TODO BOOOOOOOOOOOM!
+		
+		for(int x = -1*cellRange; x <= cellRange; x++) {
+			for(int y = -1*cellRange; y <= cellRange; y++) {
+				
+			}
+		}
 	}
 }

@@ -13,6 +13,8 @@ public class Game extends Thread {
 	
 	public Game() {
 		window = new GameWindow();
+		
+		GridObjectFactory.init(this);
 	}
 	
 	@Override

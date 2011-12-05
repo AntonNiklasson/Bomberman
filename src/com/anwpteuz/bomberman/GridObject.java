@@ -6,7 +6,8 @@ package com.anwpteuz.bomberman;
  */
 public class GridObject {
 	
-	private static Game game;
+	protected int positionX, positionY;
+	protected static Game game;
 	
 	public void init(Game g) {
 		game = g;

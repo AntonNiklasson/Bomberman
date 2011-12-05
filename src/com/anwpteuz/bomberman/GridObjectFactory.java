@@ -4,12 +4,15 @@ public class GridObjectFactory {
 	
 	private static Game game;
 	
-	public void init(Game g) {
+	public static void init(Game g) {
 		game = g;
 	}
 	
-	public static void addBomb(int posX, int posY) {
-		// TODO Add bomb to GameGrid
+	public static Bomb addBomb(int posX, int posY) {
+		Bomb bomb = new Bomb();
+		game.getGrid().addGridObject(bomb, posX, posY);
+		
+		return bomb;
 	}
 	
 }
