@@ -1,4 +1,4 @@
-package com.amwpteuz.bomberman;
+package com.anwpteuz.bomberman;
 
 /**
  * Core/root class. Encapsulates all components of the game. 

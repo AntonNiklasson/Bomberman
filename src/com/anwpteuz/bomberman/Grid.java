@@ -1,4 +1,4 @@
-package com.amwpteuz.bomberman;
+package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;

@@ -1,4 +1,4 @@
-package com.amwpteuz.bomberman;
+package com.anwpteuz.bomberman;
 
 /**
  * This is the main class of the project. It initializes and runs the Game class. 

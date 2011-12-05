@@ -1,4 +1,4 @@
-package com.amwpteuz.bomberman;
+package com.anwpteuz.bomberman;
 
 import javax.swing.JFrame;
 

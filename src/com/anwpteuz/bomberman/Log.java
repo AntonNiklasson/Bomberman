@@ -1,4 +1,4 @@
-package com.amwpteuz.bomberman;
+package com.anwpteuz.bomberman;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
