@@ -9,9 +9,13 @@ public class Enemy extends MoveableGridObject {
 	}
 	
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-
+	public void move(int toX, int toY) {
+		// TODO
 	}
 
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
