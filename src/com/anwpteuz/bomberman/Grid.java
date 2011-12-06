@@ -14,7 +14,7 @@ public class Grid extends JPanel {
 	
 	public static final int COLUMNS = 20;
 	public static final int ROWS = 15;
-	public static final int CELL_SIZE = 32;
+	public static final int CELL_SIZE = 50;
 	
 	// Java doesn't allow array combined with generics
 	class Tile extends LinkedList<GridObject> {}
@@ -39,7 +39,7 @@ public class Grid extends JPanel {
 			for(int y = 0; y < ROWS; y++) {
 				
 				// Fill tile with white color
-				g.setColor(Color.WHITE);
+				g.setColor(x%2-y%2==0?Color.WHITE:Color.BLACK);
 				g.fillRect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE);
 				
 				// Call paint on every gridobject on this tile
