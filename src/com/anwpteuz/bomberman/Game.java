@@ -17,7 +17,7 @@ public class Game extends Thread {
 		window = new GameWindow();
 		
 		GridObjectFactory.init(this);
-		player = GridObjectFactory.addPlayer(5, 5);
+		player = GridObjectFactory.addPlayer(1, 1);
 		
 		// Add top and bottom walls
 		for(int x = 0; x < Grid.COLUMNS; x++) {
@@ -29,6 +29,13 @@ public class Game extends Thread {
 		for(int y = 1; y < Grid.ROWS; y++) {
 			GridObjectFactory.addWall(0, y);
 			GridObjectFactory.addWall(Grid.COLUMNS-1, y);
+		}
+		
+		// Add grid pattern of walls
+		for(int x = 2; x < (Grid.COLUMNS - 2); x += 2) {
+			for(int y = 2; y < (Grid.ROWS - 2); y += 2) {
+				GridObjectFactory.addWall(x, y);
+			}
 		}
 	}
 	
