@@ -14,7 +14,6 @@ public abstract class GridObject {
 
 	
 	public GridObject(Game g) {
-		
 		init(g);
 	}
 	

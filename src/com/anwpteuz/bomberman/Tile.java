@@ -21,4 +21,13 @@ public class Tile extends LinkedList<GridObject> {
 	public int getY() {
 		return positionY;
 	}
+	
+	public boolean hasWall() {
+		for(GridObject go : this) {
+			if(go instanceof Wall)
+				return true;
+		}
+		
+		return false;
+	}
 }

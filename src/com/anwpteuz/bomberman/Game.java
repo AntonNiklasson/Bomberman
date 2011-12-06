@@ -40,6 +40,9 @@ public class Game extends Thread {
 	public synchronized void start() {
 		super.start();
 		Log.get().info("Game started");
+		
+		
+		// TODO Listen for keyDown events and move players accordingly
 	}
 	
 	public GameWindow getWindow() {
