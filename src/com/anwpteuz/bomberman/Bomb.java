@@ -48,7 +48,7 @@ public class Bomb extends MoveableGridObject {
 				
 				for(GridObject go : tile) {
 					if(go instanceof ExplodableWall) {
-						go.
+						
 					}
 				}
 			}

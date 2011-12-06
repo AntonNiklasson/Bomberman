@@ -1,4 +1,7 @@
 package com.anwpteuz.bomberman;
+
+import java.awt.Graphics;
+
 /**
  * 
  * @author antonniklasson
@@ -6,11 +9,28 @@ package com.anwpteuz.bomberman;
  */
 public class GridObject {
 	
+	private Game game;
 	protected int positionX, positionY;
-	private static Game game;
+
 	
 	public void init(Game g) {
 		game = g;
+	}
+	
+	public int getX() {
+		return this.positionX;
+	}
+	
+	public void setX(int newX) {
+		this.positionX = newX;
+	}
+	
+	public int getY() {
+		return this.positionY;
+	}	
+	
+	public void setY(int newY) {
+		this.positionY = newY;
 	}
 	
 	protected Game getGame() {
@@ -18,6 +38,10 @@ public class GridObject {
 	}
 	
 	public GridObject() {
+		
+	}
+	
+	public void paint(Graphics g) {
 		
 	}
 }

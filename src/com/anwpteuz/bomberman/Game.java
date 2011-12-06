@@ -33,4 +33,12 @@ public class Game extends Thread {
 		super.start();
 		Log.get().info("Game started");
 	}
+	
+	public GameWindow getWindow() {
+		return window;
+	}
+	
+	public Grid getGrid() {
+		return window.getGrid();
+	}
 }

@@ -15,4 +15,7 @@ public class GridObjectFactory {
 		return bomb;
 	}
 	
+	public static void addPlayer(int posX, int posY) {
+		
+	}
 }

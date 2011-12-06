@@ -46,4 +46,7 @@ public class GameWindow extends JFrame {
 		frame.setSize(Grid.COLUMNS*Grid.CELL_SIZE, Grid.ROWS*Grid.CELL_SIZE + barHeight);
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
 }
