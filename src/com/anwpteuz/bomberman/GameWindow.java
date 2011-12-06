@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class GameWindow extends JFrame {
 	
@@ -12,8 +11,6 @@ public class GameWindow extends JFrame {
 	 * Generated UID
 	 */
 	private static final long serialVersionUID = -2237037338716988955L;
-	
-	private static final int barHeight = 28;
 	
 	protected JFrame frame;
 	protected Grid grid;
@@ -39,16 +36,11 @@ public class GameWindow extends JFrame {
 		
 		frame.add(grid);
 		
-		// Setting grid size
+		// Setting up sizes of the frame and grid
 		Dimension dim = new Dimension();
-		dim.setSize(Grid.COLUMNS*Grid.CELL_SIZE, Grid.ROWS*Grid.CELL_SIZE + barHeight);
+		dim.setSize(Grid.COLUMNS*Grid.CELL_SIZE, Grid.ROWS*Grid.CELL_SIZE);
 		grid.setSize(dim);
 		grid.setPreferredSize(dim);
-		frame.setSize(dim);
-		
-		
-		
-		
 		frame.pack();
 		
 		// Centering the frame

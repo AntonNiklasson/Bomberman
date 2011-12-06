@@ -1,6 +1,5 @@
 package com.anwpteuz.bomberman;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -8,10 +7,10 @@ import java.awt.Graphics;
  * @author antonniklasson
  *
  */
-public class GridObject {
+public abstract class GridObject {
 	
 	private Game game;
-	protected Tile tile;
+	private Tile tile;
 
 	
 	public GridObject(Game g) {

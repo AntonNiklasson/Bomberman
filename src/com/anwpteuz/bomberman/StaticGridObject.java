@@ -5,7 +5,7 @@ package com.anwpteuz.bomberman;
  *
  */
 public abstract class StaticGridObject extends GridObject {
-	
-	
-	
+	public StaticGridObject(Game g) {
+		super(g);
+	}
 }

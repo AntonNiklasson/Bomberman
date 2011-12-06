@@ -5,8 +5,8 @@ package com.anwpteuz.bomberman;
  *
  */
 public class ExplodableWall extends Wall {
-	public ExplodableWall() {
-		
+	public ExplodableWall(Game g) {
+		super(g);
 	}
 	
 	
