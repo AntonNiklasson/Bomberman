@@ -46,22 +46,18 @@ public class Game extends Thread {
 		 */
 		boolean[][] addTo = new boolean[Grid.COLUMNS][Grid.ROWS];
 		Random randomizer = new Random();
+		int expWallsLeft = 50;
 		
-		for(int i = 0; i < 45; i++) {
-			int x = randomizer.nextInt(Grid.COLUMNS);
-			int y = randomizer.nextInt(Grid.ROWS);
+		while(expWallsLeft > 0) {
+			int x, y;
 			
-			addTo[x][y] = true;
-		}
-		
-		for(int x = 0; x < Grid.COLUMNS; x++) {
-			for(int y = 0; y < Grid.ROWS; y++) {
-				Tile tile = getGrid().getTile(x, y);
-				
-				if(addTo[x][y] && !tile.hasWall() && !tile.hasPlayer()) {
-					GridObjectFactory.addExplodableWall(x, y);
-				}
-			}
+			do {
+				x = randomizer.nextInt(Grid.COLUMNS);
+				y = randomizer.nextInt(Grid.ROWS);
+			}while(getGrid().getTile(x, y).hasWall() || getGrid().getTile(x, y).hasPlayer());
+			
+			GridObjectFactory.addExplodableWall(x, y);
+			expWallsLeft--;
 		}
 	}
 	
