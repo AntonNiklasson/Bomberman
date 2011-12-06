@@ -1,5 +1,7 @@
 package com.anwpteuz.bomberman;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,6 +40,19 @@ public class Bomb extends MoveableGridObject {
 	@Override
 	public void move(int toX, int toY) {
 		// TODO Move?
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(Color.GREEN);
+		
+		int padding = 10;
+		g.fillRect(
+				getTile().getX()*Grid.CELL_SIZE + padding,
+				getTile().getY()*Grid.CELL_SIZE + padding,
+				Grid.CELL_SIZE - (2 * padding),
+				Grid.CELL_SIZE - (2* padding)
+		);
 	}
 	
 	public void explode() {
