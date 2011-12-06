@@ -33,6 +33,7 @@ public class Grid extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 				repaint();
+				invalidate();
 			}
 		});
 		timer.start();

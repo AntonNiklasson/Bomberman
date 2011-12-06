@@ -21,6 +21,6 @@ public abstract class MoveableGridObject extends GridObject {
 	}
 	
 	public boolean canMoveTo(int toX, int toY) {
-		return getGame().getGrid().getTile(toX, toY).hasWall();
+		return !getGame().getGrid().getTile(toX, toY).hasWall();
 	}
 }
