@@ -57,10 +57,8 @@ public class Grid extends JPanel {
 	 * @param x Start x position
 	 * @param y Start y position
 	 */
-	public void addGridObject(GridObject o, int x, int y) {
-		tileList[x][y].add(o);
-		o.setX(x);
-		o.setY(y);
+	public void addGridObject(GridObject o) {
+		tileList[o.getX()][o.getY()].add(o);
 	}
 	
 	/**
@@ -72,7 +70,8 @@ public class Grid extends JPanel {
 	 */
 	public void moveGridObject(GridObject o, int x, int y) {
 		removeGridObject(o);
-		addGridObject(o, x, y);
+		
+		addGridObject(o);
 	}
 	
 	public LinkedList<GridObject> getTile(int x, int y) {

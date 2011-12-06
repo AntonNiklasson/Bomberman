@@ -18,4 +18,8 @@ public class GridObjectFactory {
 	public static void addPlayer(int posX, int posY) {
 		
 	}
+	
+	public static void addEnemy(int posX, int posY) {
+		game.getGrid().addGridObject(new Enemy(1, 1));
+	}
 }
