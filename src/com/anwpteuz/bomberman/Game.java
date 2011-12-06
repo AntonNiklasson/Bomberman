@@ -19,9 +19,16 @@ public class Game extends Thread {
 		GridObjectFactory.init(this);
 		player = GridObjectFactory.addPlayer(5, 5);
 		
-		for(int x = 0; x < Grid.HEIGHT; x++) {
+		// Add top and bottom walls
+		for(int x = 0; x < Grid.COLUMNS; x++) {
 			GridObjectFactory.addWall(x, 0);
 			GridObjectFactory.addWall(x, Grid.ROWS-1);
+		}
+		
+		// Add left and right walls
+		for(int y = 1; y < Grid.ROWS; y++) {
+			GridObjectFactory.addWall(0, y);
+			GridObjectFactory.addWall(Grid.COLUMNS-1, y);
 		}
 	}
 	
