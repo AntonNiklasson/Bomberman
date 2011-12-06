@@ -10,25 +10,37 @@ public class GridObjectFactory {
 	
 	public static Bomb addBomb(int posX, int posY) {
 		Bomb bomb = new Bomb(game);
-		game.getGrid().getTile(posX, posY).add(bomb);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		tile.add(bomb);
+		bomb.setTile(tile);
 		
 		return bomb;
 	}
 	
 	public static Player addPlayer(int posX, int posY) {
 		Player player = new Player(game);
-		game.getGrid().getTile(posX, posY).add(player);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		tile.add(player);
+		player.setTile(tile);
+		
 		return player;
 	}
 	
 	public static Wall addWall(int posX, int posY) {
 		Wall wall = new Wall(game);
-		game.getGrid().getTile(posX, posY).add(wall);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		tile.add(wall);
+		wall.setTile(tile);
+		
 		return wall;
 	}
 	
-	public static void addEnemy(int posX, int posY) {
+	public static Enemy addEnemy(int posX, int posY) {
 		Enemy enemy = new Enemy(game);
-		game.getGrid().getTile(posX, posY).add(enemy);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		tile.add(enemy);
+		enemy.setTile(tile);
+		
+		return enemy;
 	}
 }

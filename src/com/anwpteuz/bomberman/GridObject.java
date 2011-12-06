@@ -26,6 +26,10 @@ public abstract class GridObject {
 		return tile;
 	}
 	
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
+	
 	protected Game getGame() {
 		return game;
 	}

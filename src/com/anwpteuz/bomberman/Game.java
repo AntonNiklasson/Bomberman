@@ -21,7 +21,7 @@ public class Game extends Thread {
 		
 		for(int x = 0; x < Grid.HEIGHT; x++) {
 			GridObjectFactory.addWall(x, 0);
-			GridObjectFactory.addWall(x, Grid.ROWS);
+			GridObjectFactory.addWall(x, Grid.ROWS-1);
 		}
 	}
 	

@@ -29,8 +29,6 @@ public class Grid extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
-		Log.get().info("Testing Grid.paint()");
-		
 		// Fill with white color
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getSize().width, getSize().height);
