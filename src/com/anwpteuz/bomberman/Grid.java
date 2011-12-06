@@ -14,7 +14,7 @@ public class Grid extends JPanel {
 	 */
 	private static final long serialVersionUID = 4158705485206730087L;
 	
-	public static final int COLUMNS = 19; // This needs to be odd in order for the grid pattern to line up nicely
+	public static final int COLUMNS = 19;
 	public static final int ROWS = 15;
 	public static final int CELL_SIZE = 50;
 	
