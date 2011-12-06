@@ -15,7 +15,15 @@ public class GridObjectFactory {
 		return bomb;
 	}
 	
-	public static void addPlayer(int posX, int posY) {
-		
+	public static Player addPlayer(int posX, int posY) {
+		Player player = new Player(posX, posY);
+		game.getGrid().addGridObject(player, posX, posY);
+		return player;
+	}
+	
+	public static Wall addWall(int posX, int posY) {
+		Wall wall = new Wall(posX, posY);
+		game.getGrid().addGridObject(wall, posX, posY);
+		return wall;
 	}
 }

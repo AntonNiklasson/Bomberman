@@ -2,8 +2,6 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.LinkedList;
-
 import javax.swing.JPanel;
 
 public class Grid extends JPanel {
@@ -16,8 +14,6 @@ public class Grid extends JPanel {
 	public static final int ROWS = 15;
 	public static final int CELL_SIZE = 50;
 	
-	// Java doesn't allow array combined with generics
-	class Tile extends LinkedList<GridObject> {}
 	private Tile[][] tileList = new Tile[COLUMNS][ROWS];
 
 	public Grid() {
@@ -35,13 +31,12 @@ public class Grid extends JPanel {
 		
 		Log.get().info("Testing Grid.paint()");
 		
+		// Fill with white color
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, getSize().width, getSize().height);
+		
 		for(int x = 0; x < COLUMNS; x++) {
 			for(int y = 0; y < ROWS; y++) {
-				
-				// Fill tile with white color
-				g.setColor(x%2-y%2==0?Color.WHITE:Color.BLACK);
-				g.fillRect(x*CELL_SIZE, y*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-				
 				// Call paint on every gridobject on this tile
 				for(GridObject o : tileList[x][y]) {
 					o.paint(g);
@@ -50,36 +45,8 @@ public class Grid extends JPanel {
 		}	
 	}
 	
-	/**
-	 * Adds a GridObject to specified coordinates.
-	 * 
-	 * @param o GridObject to move
-	 * @param x Start x position
-	 * @param y Start y position
-	 */
-	public void addGridObject(GridObject o, int x, int y) {
-		tileList[x][y].add(o);
-		o.setX(x);
-		o.setY(y);
-	}
-	
-	/**
-	 * Moves a GridObject to a new coordinates.
-	 * 
-	 * @param o GridObject to move
-	 * @param x X destination
-	 * @param y Y destination
-	 */
-	public void moveGridObject(GridObject o, int x, int y) {
-		removeGridObject(o);
-		addGridObject(o, x, y);
-	}
-	
-	public LinkedList<GridObject> getTile(int x, int y) {
+	public Tile getTile(int x, int y) {
 		return tileList[x][y];
 	}
 	
-	public void removeGridObject(GridObject o) {
-		tileList[o.getX()][o.getY()].remove(o);
-	}
 }
