@@ -16,7 +16,10 @@ public abstract class MoveableGridObject extends GridObject {
 	 * @param toY Move Object to given y position
 	 */
 	public void move(int toX, int toY) {
-		getGame().getGrid().getTile(toX, toY).add(this);
+		this.getTile().remove(this);
+		Tile tile = getGame().getGrid().getTile(toX, toY);
+		tile.add(this);
+		this.setTile(tile);
 	}
 	
 	public void canMove() {

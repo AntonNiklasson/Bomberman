@@ -2,7 +2,11 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Grid extends JPanel {
 	/**
@@ -15,7 +19,8 @@ public class Grid extends JPanel {
 	public static final int CELL_SIZE = 50;
 	
 	private Tile[][] tileList = new Tile[COLUMNS][ROWS];
-
+	private Timer timer;
+	
 	public Grid() {
 		// Initialize the tile list
 		for(int x = 0; x < COLUMNS; x++) {
@@ -23,6 +28,14 @@ public class Grid extends JPanel {
 				tileList[x][y] = new Tile(x, y);
 			}
 		}
+		
+		timer = new Timer(16, new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				repaint();
+			}
+		});
+		timer.start();
 	}
 	
 	@Override
