@@ -37,7 +37,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
 		
-		Log.get().info("KEY PRESSED");
+		//Log.get().info("KEY PRESSED");
 		
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.move(getTile().getX()-1, getTile().getY());

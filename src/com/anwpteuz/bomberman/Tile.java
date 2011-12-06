@@ -30,4 +30,13 @@ public class Tile extends LinkedList<GridObject> {
 		
 		return false;
 	}
+	
+	public boolean hasPlayer() {
+		for(GridObject go : this) {
+			if(go instanceof Player)
+				return true;
+		}
+		
+		return false;
+	}
 }

@@ -1,5 +1,7 @@
 package com.anwpteuz.bomberman;
 
+import java.util.Random;
+
 /**
  * Core/root class. Encapsulates all components of the game. 
  * 
@@ -35,6 +37,30 @@ public class Game extends Thread {
 		for(int x = 2; x < (Grid.COLUMNS - 2); x += 2) {
 			for(int y = 2; y < (Grid.ROWS - 2); y += 2) {
 				GridObjectFactory.addWall(x, y);
+			}
+		}
+		
+		
+		/*
+		 * Adding some randomized ExplodableWall objects
+		 */
+		boolean[][] addTo = new boolean[Grid.COLUMNS][Grid.ROWS];
+		Random randomizer = new Random();
+		
+		for(int i = 0; i < 45; i++) {
+			int x = randomizer.nextInt(Grid.COLUMNS);
+			int y = randomizer.nextInt(Grid.ROWS);
+			
+			addTo[x][y] = true;
+		}
+		
+		for(int x = 0; x < Grid.COLUMNS; x++) {
+			for(int y = 0; y < Grid.ROWS; y++) {
+				Tile tile = getGrid().getTile(x, y);
+				
+				if(addTo[x][y] && !tile.hasWall() && !tile.hasPlayer()) {
+					GridObjectFactory.addExplodableWall(x, y);
+				}
 			}
 		}
 	}
