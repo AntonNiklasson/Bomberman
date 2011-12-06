@@ -21,7 +21,12 @@ public class Bomb extends MoveableGridObject {
 	protected Timer timer;
 	protected int explosionDelay = 3000;
 	
-	public Bomb() {
+	public Bomb(int posX, int posY) {
+		
+		this.setX(posX);
+		this.setY(posY);
+		
+		
 		timer = new Timer(explosionDelay, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -48,7 +53,7 @@ public class Bomb extends MoveableGridObject {
 				
 				for(GridObject go : tile) {
 					if(go instanceof ExplodableWall) {
-						
+						getGame().getGrid().removeGridObject(go);
 					}
 				}
 			}

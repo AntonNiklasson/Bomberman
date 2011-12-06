@@ -1,5 +1,6 @@
 package com.anwpteuz.bomberman;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -10,35 +11,24 @@ import java.awt.Graphics;
 public class GridObject {
 	
 	private Game game;
-	protected int positionX, positionY;
+	protected Tile tile;
 
+	
+	public GridObject(Game g) {
+		
+		init(g);
+	}
 	
 	public void init(Game g) {
 		game = g;
 	}
-	
-	public int getX() {
-		return this.positionX;
-	}
-	
-	public void setX(int newX) {
-		this.positionX = newX;
-	}
-	
-	public int getY() {
-		return this.positionY;
-	}	
-	
-	public void setY(int newY) {
-		this.positionY = newY;
+
+	public Tile getTile() {
+		return tile;
 	}
 	
 	protected Game getGame() {
 		return game;
-	}
-	
-	public GridObject() {
-		
 	}
 	
 	public void paint(Graphics g) {
