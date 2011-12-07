@@ -12,8 +12,12 @@ import java.util.Random;
  */
 public class Game extends Thread {
 	
+	public static final int targetTime = 16;
+	
 	private GameWindow window;
 	private boolean isRunning;
+	
+	private long lastUpdate;
 	private ArrayList<Player> players = new ArrayList<Player>();
 
 	
@@ -78,17 +82,45 @@ public class Game extends Thread {
 	public void run() {
 		super.run();
 		
+		isRunning = true;
+		lastUpdate = System.currentTimeMillis();
+		
 		Log.get().info("Game running");
 		while(isRunning) {
 			
+			// Get current time
+			long startTime = System.currentTimeMillis();
+			
+			// Call update on every Updateable GridObject in this grid.
+			for(int x = 0; x < Grid.COLUMNS; x++) {
+				for(int y = 0; y < Grid.ROWS; y++) {
+					for(GridObject o : getGrid().getTile(x, y)) {
+						if(o instanceof Updateable) {
+							((Updateable)o).update();
+						}
+					}
+				}
+			}
+			
+			// Diff the time with the one before the update
+			long endTime = System.currentTimeMillis();
+			long deltaTime = endTime - startTime;
+			
+			// Sleep till to await for targetTime to elapse
+			if(deltaTime < targetTime) {
+				try {
+					Thread.sleep(targetTime-deltaTime);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		
 	}
 	
 	@Override
 	public synchronized void start() {
-		super.start();
 		Log.get().info("Game started");
+		super.start();
 	}
 	
 	public GameWindow getWindow() {
@@ -102,6 +134,5 @@ public class Game extends Thread {
 	public Collection<Player> getPlayers() {
 		return players;
 	}
-	
 	
 }
