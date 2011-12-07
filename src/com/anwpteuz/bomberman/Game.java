@@ -1,5 +1,7 @@
 package com.anwpteuz.bomberman;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 /**
@@ -12,13 +14,15 @@ public class Game extends Thread {
 	
 	private GameWindow window;
 	private boolean isRunning;
-	private Player player;
+	private ArrayList<Player> players = new ArrayList<Player>();
+
 	
 	public Game() {
 		window = new GameWindow();
 		
 		GridObjectFactory.init(this);
-		player = GridObjectFactory.addPlayer(1, 1);
+		players.add(GridObjectFactory.addPlayer(1, 1, 1));
+		players.add(GridObjectFactory.addPlayer(2, Grid.COLUMNS-2, Grid.ROWS-2));
 		
 		// Add top and bottom walls
 		for(int x = 0; x < Grid.COLUMNS; x++) {
@@ -95,8 +99,8 @@ public class Game extends Thread {
 		return window.getGrid();
 	}
 	
-	public Player getPlayer() {
-		return player;
+	public Collection<Player> getPlayers() {
+		return players;
 	}
 	
 	

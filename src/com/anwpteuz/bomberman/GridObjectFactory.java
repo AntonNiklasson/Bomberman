@@ -17,8 +17,8 @@ public class GridObjectFactory {
 		return bomb;
 	}
 	
-	public static Player addPlayer(int posX, int posY) {
-		Player player = new Player(game);
+	public static Player addPlayer(int id, int posX, int posY) {
+		Player player = new Player(id, game);
 		Tile tile = game.getGrid().getTile(posX, posY);
 		tile.add(player);
 		player.setTile(tile);
