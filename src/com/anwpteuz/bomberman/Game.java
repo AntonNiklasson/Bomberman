@@ -14,8 +14,8 @@ public class Game extends Thread {
 	
 	private GameWindow window;
 	private boolean isRunning;
-	
 	private ArrayList<Player> players = new ArrayList<Player>();
+
 	
 	public Game() {
 		window = new GameWindow();
@@ -62,6 +62,16 @@ public class Game extends Thread {
 			GridObjectFactory.addExplodableWall(x, y);
 			expWallsLeft--;
 		}
+		
+		
+		// Find an empty cell and place an enemy
+		int x, y;
+		do {
+			x = randomizer.nextInt(Grid.COLUMNS);
+			y = randomizer.nextInt(Grid.ROWS);
+		}while(getGrid().getTile(x, y).hasWall() || getGrid().getTile(x, y).hasPlayer());
+		
+		GridObjectFactory.addEnemy(x, y);
 	}
 	
 	@Override
