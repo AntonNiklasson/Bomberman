@@ -67,28 +67,36 @@ public class Bomb extends MoveableGridObject {
 		 */
 		
 		// Left
+		leftOuter:
 		for(int x = 0; x >= -cellRange; x--) {
-			Tile tile = grid.getTile(getTile().getX()-x, getTile().getY());
+			Tile tile = grid.getTile(getTile().getX()+x, getTile().getY());
+			if(tile == null) break;
 			
 			for(GridObject go : tile) {
-				if(go instanceof ExplodableWall) {
-					tile.remove(go);
+				if(go instanceof Wall) {
+					if(go instanceof ExplodableWall) {
+						tile.remove(go);
+					}
 					
 					// Break here since bombs only can explode one wall at a time
-					break;
+					break leftOuter;
 				}
 			}
 		}
 		// Right
-		for(int x = 0; x <= -cellRange; x++) {
+		rightOuter:
+		for(int x = 0; x <= cellRange; x++) {
 			Tile tile = grid.getTile(getTile().getX()+x, getTile().getY());
+			if(tile == null) break;
 			
 			for(GridObject go : tile) {
-				if(go instanceof ExplodableWall) {
-					tile.remove(go);
+				if(go instanceof Wall) {
+					if(go instanceof ExplodableWall) {
+						tile.remove(go);
+					}
 					
 					// Break here since bombs only can explode one wall at a time
-					break;
+					break rightOuter;
 				}
 			}
 		}
@@ -100,31 +108,42 @@ public class Bomb extends MoveableGridObject {
 		 */
 		
 		// Up
+		upOuter:
 		for(int y = 0; y >= -cellRange; y--) {
-			Tile tile = grid.getTile(getTile().getX(), getTile().getY()-y);
+			Tile tile = grid.getTile(getTile().getX(), getTile().getY()+y);
+			if(tile == null) break;
 			
 			for(GridObject go : tile) {
-				if(go instanceof ExplodableWall) {
-					tile.remove(go);
+				if(go instanceof Wall) {
+					if(go instanceof ExplodableWall) {
+						tile.remove(go);
+					}
 					
 					// Break here since bombs only can explode one wall at a time
-					break;
+					break upOuter;
 				}
 			}
 		}
 		
 		// Down
-		for(int y = 0; y <= -cellRange; y++) {
+		downOuter:
+		for(int y = 0; y <= cellRange; y++) {
 			Tile tile = grid.getTile(getTile().getX(), getTile().getY()+y);
+			if(tile == null) break;
 			
 			for(GridObject go : tile) {
-				if(go instanceof ExplodableWall) {
-					tile.remove(go);
+				if(go instanceof Wall) {
+					if(go instanceof ExplodableWall) {
+						tile.remove(go);
+					}
 					
 					// Break here since bombs only can explode one wall at a time
-					break;
+					break downOuter;
 				}
 			}
 		}
+		
+		
+		getTile().remove(this);
 	}
 }

@@ -62,6 +62,8 @@ public class Grid extends JPanel {
 	}
 	
 	public Tile getTile(int x, int y) {
+		if(x < 0 || x > COLUMNS-1 || y < 0 || y > ROWS-1) return null;
+		
 		return tileList[x][y];
 	}
 	
