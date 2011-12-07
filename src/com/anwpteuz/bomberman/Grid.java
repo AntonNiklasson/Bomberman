@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -67,4 +68,17 @@ public class Grid extends JPanel {
 		return tileList[x][y];
 	}
 	
+	public ArrayList<Tile> getTileNeighbours(Tile tile) {
+		ArrayList<Tile> neighbours = new ArrayList<Tile>();
+		int fromX = tile.getX();
+		int fromY = tile.getY();
+		
+		neighbours.add(getTile(fromX-1, fromY)); // Left
+		neighbours.add(getTile(fromX+1, fromY)); // Right
+		neighbours.add(getTile(fromX, fromY-1)); // Up
+		neighbours.add(getTile(fromX, fromY+1)); // Down
+		
+		
+		return neighbours;
+	}
 }
