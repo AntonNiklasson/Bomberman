@@ -15,7 +15,6 @@ import java.awt.event.KeyListener;
 public class Player extends MoveableGridObject implements KeyEventDispatcher {
 
 	private int bombCapacity = 3;
-	private int bombsActive;
 	
 	public Player(Game g) {
 		super(g);
@@ -23,9 +22,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 	}
 	
 	public void placeBomb() {
-		if(bombCapacity > bombsActive) {
-			//GridObjectFactory.addBomb();
-		}
+		GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
 	}
 	
 	@Override
@@ -36,8 +33,10 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
+
 		if(e.getID() != KeyEvent.KEY_PRESSED) return false;
 		
+		// Left, Right, Up, Down
 		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 			this.move(getTile().getX()-1, getTile().getY());
 		} else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -47,6 +46,12 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 		} else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 			this.move(getTile().getX(), getTile().getY()+1);
 		}
+		
+		// Place bomb
+		else if(e.getKeyCode() == KeyEvent.VK_SPACE)
+			this.placeBomb();
+		
+		
 		return false;
 	}
 }

@@ -35,6 +35,15 @@ public class GridObjectFactory {
 		return wall;
 	}
 	
+	public static ExplodableWall addExplodableWall(int posX, int posY) {
+		ExplodableWall expWall = new ExplodableWall(game);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		tile.add(expWall);
+		expWall.setTile(tile);
+		
+		return expWall;		
+	}
+	
 	public static Enemy addEnemy(int posX, int posY) {
 		Enemy enemy = new Enemy(game);
 		Tile tile = game.getGrid().getTile(posX, posY);
