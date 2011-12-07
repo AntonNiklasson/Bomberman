@@ -21,4 +21,16 @@ public class Enemy extends MoveableGridObject {
 				Grid.CELL_SIZE - 2*padding
 		);
 	}
+	
+	
+	public void pickDirection() {
+		/*
+		 * -1, 0
+		 * 1, 0
+		 * 0, -1
+		 * 0, 1
+		 */
+		
+		
+	}
 }
