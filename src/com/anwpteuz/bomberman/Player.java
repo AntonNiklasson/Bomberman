@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author antonniklasson
  *
  */
-public class Player extends MoveableGridObject implements KeyEventDispatcher {
+public class Player extends MoveableGridObject implements KeyEventDispatcher, Updateable {
 
 	private static final Color[] colorList = new Color[] { Color.RED, Color.BLUE };
 	
@@ -106,5 +106,10 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 		*/
 		
 		return false;
+	}
+
+	@Override
+	public void update() {
+		// Called on every update call from Game
 	}
 }
