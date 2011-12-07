@@ -2,9 +2,13 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Enemy extends MoveableGridObject {
 
+	Tile prevTile;
+	
 	public Enemy(Game g) {
 		super(g);
 	}
@@ -23,14 +27,29 @@ public class Enemy extends MoveableGridObject {
 	}
 	
 	
-	public void pickDirection() {
-		/*
-		 * -1, 0
-		 * 1, 0
-		 * 0, -1
-		 * 0, 1
-		 */
+	public void moveToNextTile() {	
+		Grid grid = getGame().getGrid();
+		ArrayList<Tile> neighbours = grid.getTileNeighbours(getTile());
+		Tile nextTile;
 		
+		for(Tile neighbour : neighbours) {
+			if(neighbour.hasWall()) neighbours.remove(neighbour); 
+		}
 		
+		if(neighbours.size() > 1) {
+			do {
+				nextTile = neighbours.get(new Random().nextInt(neighbours.size()));
+			} while(nextTile == prevTile);
+		} else {
+			nextTile = prevTile;
+		}
+		
+		moveTo(nextTile);
+	}
+	
+	@Override
+	public void setTile(Tile tile) {
+		prevTile = getTile();
+		super.setTile(tile);
 	}
 }

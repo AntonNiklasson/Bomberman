@@ -52,13 +52,4 @@ public class GridObjectFactory {
 		
 		return enemy;
 	}
-	
-	public static Powerup addUpgrade(int posX, int posY) {
-		Powerup powerup = new Powerup(game);
-		Tile tile = game.getGrid().getTile(posX, posY);
-		tile.add(powerup);
-		powerup.setTile(tile);
-		
-		return powerup;
-	}
 }

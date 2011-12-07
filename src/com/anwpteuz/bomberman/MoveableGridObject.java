@@ -20,6 +20,10 @@ public abstract class MoveableGridObject extends GridObject {
 		}
 	}
 	
+	public void moveTo(Tile tile) {
+		moveTo(tile.getX(), tile.getY());
+	}
+	
 	public void move(int x, int y) {
 		this.moveTo(getTile().getX()+x, getTile().getY()+y);
 	}
