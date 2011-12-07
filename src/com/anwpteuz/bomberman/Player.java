@@ -14,6 +14,8 @@ import java.util.HashMap;
  */
 public class Player extends MoveableGridObject implements KeyEventDispatcher {
 
+	private static final Color[] colorList = new Color[] { Color.RED, Color.BLUE };
+	
 	private int id;
 	private int bombCapacity = 3;
 	private HashMap<Integer, String> keyBindings = new HashMap<Integer, String>();
@@ -23,6 +25,10 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 		this.id = id;
 		defaultKeyBindings();
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
+	}
+	
+	public Color getColor() {
+		return colorList[id-1];
 	}
 	
 	public void defaultKeyBindings() {
@@ -64,7 +70,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher {
 	
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.RED);
+		g.setColor(getColor());
 		g.fillOval(getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE);
 	}
 
