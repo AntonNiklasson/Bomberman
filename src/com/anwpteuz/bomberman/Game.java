@@ -92,14 +92,8 @@ public class Game extends Thread {
 			long startTime = System.currentTimeMillis();
 			
 			// Call update on every Updateable GridObject in this grid.
-			for(int x = 0; x < Grid.COLUMNS; x++) {
-				for(int y = 0; y < Grid.ROWS; y++) {
-					for(GridObject o : getGrid().getTile(x, y)) {
-						if(o instanceof Updateable) {
-							((Updateable)o).update();
-						}
-					}
-				}
+			for(Updateable updateable : getGrid().getAllUpdateables()) {
+				updateable.update();
 			}
 			
 			// Diff the time with the one before the update
