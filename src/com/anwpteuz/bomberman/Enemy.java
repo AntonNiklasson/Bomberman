@@ -5,9 +5,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends MoveableGridObject {
+public class Enemy extends MoveableGridObject implements Updateable {
 
 	Tile prevTile;
+	int timer;
 	
 	public Enemy(Game g) {
 		super(g);
@@ -26,14 +27,24 @@ public class Enemy extends MoveableGridObject {
 		);
 	}
 	
+	public void placeBomb() {
+		GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
+	}
 	
 	public void moveToNextTile() {	
 		Grid grid = getGame().getGrid();
 		ArrayList<Tile> neighbours = grid.getTileNeighbours(getTile());
 		Tile nextTile;
 		
-		for(Tile neighbour : neighbours) {
-			if(neighbour.hasWall()) neighbours.remove(neighbour); 
+		for(int i = 0; i < neighbours.size(); i++) {
+			Tile neighbour = neighbours.get(i);
+			if(neighbour.hasWall()) {
+				neighbours.remove(neighbour);
+				
+				// The order changes when we remove a Tile
+				i--;
+			}
+			
 		}
 		
 		if(neighbours.size() > 1) {
@@ -42,14 +53,30 @@ public class Enemy extends MoveableGridObject {
 			} while(nextTile == prevTile);
 		} else {
 			nextTile = prevTile;
+			
+			if(!prevTile.hasBomb())
+				this.placeBomb();
 		}
 		
-		moveTo(nextTile);
+		if(nextTile != null) {
+			moveTo(nextTile);
+			Log.get().info(nextTile.getX() + " " + nextTile.getY());
+		}
 	}
 	
 	@Override
 	public void setTile(Tile tile) {
 		prevTile = getTile();
 		super.setTile(tile);
+	}
+
+	@Override
+	public void update() {
+		timer += Game.targetTime;
+		
+		if(timer >= 500) {
+			timer = 0;
+			moveToNextTile();
+		}
 	}
 }

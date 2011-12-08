@@ -47,6 +47,7 @@ public class Grid extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+	
 		
 		// Fill with white color
 		g.setColor(Color.WHITE);
@@ -59,13 +60,26 @@ public class Grid extends JPanel {
 					o.paint(g);
 				}
 			}
-		}	
+		}
 	}
 	
 	public Tile getTile(int x, int y) {
 		if(x < 0 || x > COLUMNS-1 || y < 0 || y > ROWS-1) return null;
 		
 		return tileList[x][y];
+	}
+	
+	public ArrayList<Updateable> getAllUpdateables() {
+		ArrayList<Updateable> updateables = new ArrayList<Updateable>();
+		for(int x = 0; x < COLUMNS; x++) {
+			for(int y = 0; y < ROWS; y++) {
+				for(GridObject o : tileList[x][y]) {
+					if(o instanceof Updateable) updateables.add(((Updateable)o));
+				}
+			}
+		}
+		
+		return updateables;
 	}
 	
 	public ArrayList<Tile> getTileNeighbours(Tile tile) {

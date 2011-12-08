@@ -39,4 +39,13 @@ public class Tile extends LinkedList<GridObject> {
 		
 		return false;
 	}
+	
+	public boolean hasBomb() {
+		for(GridObject go : this) {
+			if(go instanceof Bomb)
+				return true;
+		}
+		
+		return false;
+	}
 }
