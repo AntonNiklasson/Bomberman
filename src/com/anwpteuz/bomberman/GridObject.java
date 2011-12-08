@@ -11,7 +11,7 @@ public abstract class GridObject {
 	
 	private Game game;
 	private Tile tile;
-	private boolean alive;
+
 	
 	public GridObject(Game g) {
 		init(g);
@@ -27,7 +27,6 @@ public abstract class GridObject {
 	
 	public void setTile(Tile tile) {
 		this.tile = tile;
-		alive = tile != null;
 	}
 	
 	protected Game getGame() {
@@ -36,10 +35,5 @@ public abstract class GridObject {
 	
 	public void paint(Graphics g) {
 		
-	}
-	
-	public void remove() {
-		this.getTile().remove(this);
-		this.setTile(null);
 	}
 }
