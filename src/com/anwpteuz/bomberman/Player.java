@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,10 +17,24 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 
 	private static final Color[] colorList = new Color[] { Color.RED, Color.BLUE };
 	
+	/**
+	 * The ID of the player should be different for each player.
+	 * This is used by eg. defaultKeyBindings and paint so that it can give different bindings and looks to every player.
+	 */
 	private int id;
+	
+	// Bomb variables
 	private int bombCapacity = 3;
+	private ArrayList<Bomb> activeBombs = new ArrayList<Bomb>();
+	
 	private HashMap<Integer, String> keyBindings = new HashMap<Integer, String>();
 	
+	/**
+	 * Creates a new instance of the Player.
+	 * 
+	 * @param id The ID should 
+	 * @param g
+	 */
 	public Player(int id, Game g) {
 		super(g);
 		this.id = id;
@@ -64,8 +79,16 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		return true;
 	}
 	
-	public void placeBomb() {
-		GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
+	public boolean placeBomb() {
+		// Check if we can place a bomb
+		if(activeBombs.size() < bombCapacity) {
+			activeBombs.add(
+				GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY())
+			);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -111,5 +134,22 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	@Override
 	public void update() {
 		// Called on every update call from Game
+	}
+	
+	/**
+	 * Sets the bomb capacity, which is the number of bombs the player carries + the number of active bombs the player have on the grid.
+	 * @param bombCapacity The new bomb capacity
+	 */
+	public void setBombCapacity(int bombCapacity) {
+		this.bombCapacity = bombCapacity;
+	}
+	
+	/**
+	 * Gets the bomb capacity.
+	 * The bomb capacity is the number of bombs the player carries + the number of active bombs the player have on the grid.
+	 * @return
+	 */
+	public int getBombCapacity() {
+		return bombCapacity;
 	}
 }
