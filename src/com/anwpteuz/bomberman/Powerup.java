@@ -1,9 +1,28 @@
 package com.anwpteuz.bomberman;
 
-public class Powerup extends StaticGridObject {
-
+/**
+ * The Powerup class should be the super class for every different type of powerup on the 
+ * @author Matteus
+ *
+ */
+public abstract class Powerup extends StaticGridObject {
+	
 	public Powerup(Game g) {
 		super(g);
+	}
+	
+	/**
+	 * Applies this power up to the player
+	 * 
+	 * @param player The player to apply the powerup effect to.
+	 */
+	public abstract void applyTo(Player player);
+	
+	/**
+	 * Removes the powerup from its tile
+	 */
+	protected void remove() {
+		this.getTile().remove(this);
 	}
 
 }
