@@ -12,6 +12,7 @@ public class Fire extends GridObject implements Updateable {
 	private int millisLived;
 	private int millisSpreadTime = 200;
 	private boolean isParent;
+	private Color color = (new Random().nextInt(2) == 0) ? Color.RED : Color.YELLOW;
 	
 	/**
 	 * 
@@ -35,13 +36,9 @@ public class Fire extends GridObject implements Updateable {
 	@Override
 	public void paint(Graphics g) {
 		
-		if(new Random().nextInt(1) == 0)
-			g.setColor(Color.YELLOW);
-		else
-			g.setColor(Color.RED);	
+		g.setColor(color);
 		
-		
-		int padding = 3;
+		int padding = 13;
 		g.fillRect(
 				getTile().getX()*Grid.CELL_SIZE + padding,
 				getTile().getY()*Grid.CELL_SIZE + padding,

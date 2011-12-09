@@ -49,9 +49,18 @@ public class Bomb extends MoveableGridObject {
 	}
 	
 	public void explode() {
-		// TODO BOOOOOOOOOOOM!
+		// BOOOOOOOOOOOM!
 		getTile().remove(this);
 		
-		GridObjectFactory.addFire(this.getTile().getX(), posY, dir, range)
+		
+		// X
+		
+			GridObjectFactory.addFire(this.getTile().getX(), this.getTile().getY(), Direction.LEFT, cellRange);
+		
+		GridObjectFactory.addFire(this.getTile().getX(), this.getTile().getY(), Direction.RIGHT, cellRange);
+		
+		GridObjectFactory.addFire(this.getTile().getX(), this.getTile().getY(), Direction.UP, cellRange);
+		
+		GridObjectFactory.addFire(this.getTile().getX(), this.getTile().getY(), Direction.DOWN, cellRange);
 	}
 }
