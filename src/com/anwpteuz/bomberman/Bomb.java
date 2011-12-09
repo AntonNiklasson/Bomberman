@@ -28,7 +28,6 @@ public class Bomb extends MoveableGridObject {
 		timer = new Timer(explosionDelay, new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				Log.get().info("BOOOM");
 				explode();
 			}
 		});
@@ -51,92 +50,8 @@ public class Bomb extends MoveableGridObject {
 	
 	public void explode() {
 		// TODO BOOOOOOOOOOOM!
-		
-		Grid grid = getGame().getGrid();
-		
-		
-		/*
-		 * Checking for ExplodableWall x-wise
-		 */
-		
-		// Left
-		leftOuter:
-		for(int x = 0; x >= -cellRange; x--) {
-			Tile tile = grid.getTile(getTile().getX()+x, getTile().getY());
-			if(tile == null) break;
-			
-			for(GridObject go : tile) {
-				if(go instanceof Wall) {
-					if(go instanceof ExplodableWall) {
-						tile.remove(go);
-					}
-					
-					// Break here since bombs only can explode one wall at a time
-					break leftOuter;
-				}
-			}
-		}
-		// Right
-		rightOuter:
-		for(int x = 0; x <= cellRange; x++) {
-			Tile tile = grid.getTile(getTile().getX()+x, getTile().getY());
-			if(tile == null) break;
-			
-			for(GridObject go : tile) {
-				if(go instanceof Wall) {
-					if(go instanceof ExplodableWall) {
-						tile.remove(go);
-					}
-					
-					// Break here since bombs only can explode one wall at a time
-					break rightOuter;
-				}
-			}
-		}
-		
-		
-		
-		/*
-		 * Checking for ExplodableWall y-wise
-		 */
-		
-		// Up
-		upOuter:
-		for(int y = 0; y >= -cellRange; y--) {
-			Tile tile = grid.getTile(getTile().getX(), getTile().getY()+y);
-			if(tile == null) break;
-			
-			for(GridObject go : tile) {
-				if(go instanceof Wall) {
-					if(go instanceof ExplodableWall) {
-						tile.remove(go);
-					}
-					
-					// Break here since bombs only can explode one wall at a time
-					break upOuter;
-				}
-			}
-		}
-		
-		// Down
-		downOuter:
-		for(int y = 0; y <= cellRange; y++) {
-			Tile tile = grid.getTile(getTile().getX(), getTile().getY()+y);
-			if(tile == null) break;
-			
-			for(GridObject go : tile) {
-				if(go instanceof Wall) {
-					if(go instanceof ExplodableWall) {
-						tile.remove(go);
-					}
-					
-					// Break here since bombs only can explode one wall at a time
-					break downOuter;
-				}
-			}
-		}
-		
-		
 		getTile().remove(this);
+		
+		GridObjectFactory.addFire(this.getTile().getX(), posY, dir, range)
 	}
 }

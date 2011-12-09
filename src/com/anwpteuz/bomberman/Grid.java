@@ -95,4 +95,11 @@ public class Grid extends JPanel {
 		
 		return neighbours;
 	}
+	
+	public Tile nextTile(Tile startTile, Direction dir) {
+		int x = startTile.getX() + dir.getX();
+		int y = startTile.getY() + dir.getY();
+		
+		return this.getTile(x, y);
+	}
 }

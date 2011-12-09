@@ -54,7 +54,7 @@ public class Enemy extends MoveableGridObject implements Updateable {
 		} else {
 			nextTile = prevTile;
 			
-			if(!prevTile.hasBomb())
+			if(!nextTile.hasBomb())
 				this.placeBomb();
 		}
 		

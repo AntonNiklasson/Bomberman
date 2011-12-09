@@ -52,4 +52,13 @@ public class GridObjectFactory {
 		
 		return enemy;
 	}
+	
+	public static Fire addFire(int posX, int posY, Direction dir, int range) {
+		Fire fire = new Fire(game, dir, range);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		tile.add(fire);
+		fire.setTile(tile);
+		
+		return fire;
+	}
 }
