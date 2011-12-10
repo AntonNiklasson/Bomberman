@@ -100,8 +100,6 @@ public class Game extends Thread {
 			// Spawn enemy at tile
 			GridObjectFactory.addEnemy(tile.getX(), tile.getY());
 		}
-		
-		Log.get().info(getGrid().tileHasPathToSafeTile(getGrid().getTile(1, 1), 2) ? "true" : "false");
 	}
 	
 	@Override
