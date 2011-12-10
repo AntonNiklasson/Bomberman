@@ -46,9 +46,13 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		return colorList[id-1];
 	}
 	
+	/**
+	 * Maps default key bindings for the player taking player id into account.
+	 */
 	public void defaultKeyBindings() {
 		keyBindings.clear();
 		
+		// ID specifics:
 		switch(id) {
 		case 1:
 			keyBindings.put(KeyEvent.VK_LEFT, "move_left");
@@ -66,14 +70,22 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 			break;
 		}
 		
+		// Others
+		keyBindings.put(KeyEvent.VK_ESCAPE, "exit_game");
 	}
 	
+	/**
+	 * Executes an action from the specified action.
+	 * @param action The action to execute. Eg. "move_left" will move the player one grid to the left.
+	 * @return Returns true if a action was found for the specified string.
+	 */
 	protected boolean executeAction(String action) {
 		if(action.equals("move_left")) move(-1, 0);
 		else if(action.equals("move_right")) move(1, 0);
 		else if(action.equals("move_up")) move(0, -1);
 		else if(action.equals("move_down")) move(0, 1);
 		else if(action.equals("place_bomb")) placeBomb();
+		else if(action.equals("exit_game")) System.exit(0);
 		else return false;
 		
 		return true;
