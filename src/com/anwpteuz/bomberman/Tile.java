@@ -39,4 +39,19 @@ public class Tile extends LinkedList<GridObject> {
 		
 		return false;
 	}
+	
+	/**
+	 * Compares the specified object with this tile for equality.
+	 * Returns true if the tiles position matches and the GridObject collections are equal.
+	 * 
+	 * @see LinkedList#equals(Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if(super.equals(o)) {
+			Tile tile = (Tile)o;
+			return tile.getX() == getX() && tile.getY() == getY();
+		}
+		return false;
+	}
 }

@@ -17,14 +17,21 @@ public class Game extends Thread {
 	private GameWindow window;
 	private boolean isRunning;
 	
-	private long lastUpdate;
-	
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
 	public Game() {
 		window = new GameWindow();
 		
 		GridObjectFactory.init(this);
+		
+		generateLevel();
+	}
+	
+	/**
+	 * Adds players, walls and explodable walls to the grid.
+	 */
+	private void generateLevel() {
+		// Add two players
 		players.add(GridObjectFactory.addPlayer(1, 1, 1));
 		players.add(GridObjectFactory.addPlayer(2, Grid.COLUMNS-2, Grid.ROWS-2));
 		
@@ -51,19 +58,25 @@ public class Game extends Thread {
 		/*
 		 * Adding some randomized ExplodableWall objects
 		 */
-		boolean[][] addTo = new boolean[Grid.COLUMNS][Grid.ROWS];
+		ArrayList<Tile> safeTiles = new ArrayList<Tile>();
+		safeTiles.add(getGrid().getTile(1, 1));
+		safeTiles.add(getGrid().getTile(2, 1));
+		safeTiles.add(getGrid().getTile(1, 2));
+		safeTiles.add(getGrid().getTile(Grid.COLUMNS-2, Grid.ROWS-2));
+		safeTiles.add(getGrid().getTile(Grid.COLUMNS-2, Grid.ROWS-3));
+		safeTiles.add(getGrid().getTile(Grid.COLUMNS-3, Grid.ROWS-2));
+		
 		Random randomizer = new Random();
 		int expWallsLeft = 50;
 		
 		while(expWallsLeft > 0) {
-			int x, y;
-			
+			Tile tile;
 			do {
-				x = randomizer.nextInt(Grid.COLUMNS);
-				y = randomizer.nextInt(Grid.ROWS);
-			}while(getGrid().getTile(x, y).hasWall() || getGrid().getTile(x, y).hasPlayer());
+				tile = getGrid().getTile(randomizer.nextInt(Grid.COLUMNS), randomizer.nextInt(Grid.ROWS));
+			} while(tile.hasWall() || tile.hasPlayer() || safeTiles.contains(tile));
 			
-			GridObjectFactory.addExplodableWall(x, y);
+			
+			GridObjectFactory.addExplodableWall(tile.getX(), tile.getY());
 			expWallsLeft--;
 		}
 	}
@@ -73,7 +86,6 @@ public class Game extends Thread {
 		super.run();
 		
 		isRunning = true;
-		lastUpdate = System.currentTimeMillis();
 		
 		Log.get().info("Game running");
 		while(isRunning) {
