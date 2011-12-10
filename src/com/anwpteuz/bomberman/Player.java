@@ -92,6 +92,9 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	}
 	
 	public boolean placeBomb() {
+		// Refresh the bomb list
+		refreshActiveBombs();
+		
 		// Check if we can place a bomb
 		if(activeBombs.size() < bombCapacity) {
 			activeBombs.add(
@@ -146,6 +149,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	@Override
 	public void update() {
 		// Called on every update call from Game
+		
 	}
 	
 	/**
@@ -163,5 +167,20 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	 */
 	public int getBombCapacity() {
 		return bombCapacity;
+	}
+	
+	/**
+	 * Refreshes the {@link Player#activeBombs}. Removes dead bombs.
+	 */
+	private void refreshActiveBombs() {
+		// Remove dead bombs from the active bombs list
+		for(int i = 0; i < activeBombs.size(); i++) {
+			Bomb bomb = activeBombs.get(i);
+			if(bomb.isAlive() == false) {
+				Log.get().info("Removing dead bomb.");
+				activeBombs.remove(i);
+				i--;
+			}
+		}
 	}
 }

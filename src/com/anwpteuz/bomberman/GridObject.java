@@ -42,4 +42,8 @@ public abstract class GridObject {
 		this.getTile().remove(this);
 		this.setTile(null);
 	}
+	
+	public boolean isAlive() {
+		return alive;
+	}
 }

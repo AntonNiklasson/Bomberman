@@ -137,6 +137,6 @@ public class Bomb extends MoveableGridObject {
 		}
 		
 		
-		getTile().remove(this);
+		this.remove();
 	}
 }
