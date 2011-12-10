@@ -29,7 +29,7 @@ public class Game extends Thread {
 	}
 	
 	/**
-	 * Adds players, walls and explodable walls to the grid.
+	 * Adds players, walls, explodable walls and other GridObjects to the grid.
 	 */
 	private void generateLevel() {
 		// Add two players
@@ -89,7 +89,19 @@ public class Game extends Thread {
 			y = randomizer.nextInt(Grid.ROWS);
 		}while(getGrid().getTile(x, y).hasWall() || getGrid().getTile(x, y).hasPlayer());
 		
-		GridObjectFactory.addEnemy(x, y);
+		// Add enemies
+		for(int enemyIndex = 0; enemyIndex < 1; enemyIndex++) {
+			// Get safe tile.
+			Tile tile;
+			do {
+				tile = getGrid().getTile(randomizer.nextInt(Grid.COLUMNS), randomizer.nextInt(Grid.ROWS));
+			} while(tile.hasWall() || tile.hasPlayer() || safeTiles.contains(tile) || !getGrid().tileHasPathToSafeTile(tile, 2));
+			
+			// Spawn enemy at tile
+			GridObjectFactory.addEnemy(tile.getX(), tile.getY());
+		}
+		
+		Log.get().info(getGrid().tileHasPathToSafeTile(getGrid().getTile(1, 1), 2) ? "true" : "false");
 	}
 	
 	@Override
