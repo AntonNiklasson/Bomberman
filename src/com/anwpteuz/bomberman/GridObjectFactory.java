@@ -59,8 +59,11 @@ public class GridObjectFactory {
 		
 		if(tile.hasWall()) {
 			if(tile.hasExplodableWall()) {
-				for(GridObject go : tile) {
-					if(go instanceof ExplodableWall) go.remove();
+				for(int i = 0; i < tile.size(); i++) {
+					if(tile.get(i) instanceof ExplodableWall) {
+						tile.get(i).remove();
+						i--;
+					}
 				}
 			}
 			return null;

@@ -56,6 +56,14 @@ public class Tile extends LinkedList<GridObject> {
 		}
 		return false;
 	}
+	
+	public boolean hasFire() {
+		for(GridObject go : this) {
+			if(go instanceof Fire)
+				return true;
+		}
+		return false;
+	}
 		
 	/**
 	 * Compares the specified object with this tile for equality.
