@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Stack;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -115,7 +114,7 @@ public class Grid extends JPanel {
 		for(Direction dir : Direction.directions)
 		{
 			Tile currentTile = nextTile(tile, dir);
-			if(currentTile != null && !currentTile.hasWall()) {
+			if(currentTile != null && !currentTile.has(Wall.class)) {
 				if(recursiveSafeTileCheck(currentTile, dir, bombRange)) return true;
 			}
 		}
@@ -137,7 +136,7 @@ public class Grid extends JPanel {
 		for(Direction testDir : Direction.directions) {
 			if(testDir == inv) continue;
 			Tile nextTile = nextTile(tile, testDir);
-			if(nextTile.hasWall() == false) {
+			if(nextTile.has(Wall.class) == false) {
 				if(testDir != dir || range <= 1) return true;
 				if(recursiveSafeTileCheck(nextTile, testDir, range-1)) return true;
 			}

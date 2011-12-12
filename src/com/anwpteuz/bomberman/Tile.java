@@ -22,46 +22,12 @@ public class Tile extends LinkedList<GridObject> {
 		return positionY;
 	}
 	
-	public boolean hasExplodableWall() {
+	public boolean has(Class<? extends GridObject> c) {
 		for(GridObject go : this) {
-			if(go instanceof ExplodableWall)
+			if(c.isAssignableFrom(go.getClass()))
 				return true;
 		}
 		
-		return false;
-	}
-	
-	public boolean hasWall() {
-		for(GridObject go : this) {
-			if(go instanceof Wall)
-				return true;
-		}
-		
-		return false;
-	}
-	
-	public boolean hasPlayer() {
-		for(GridObject go : this) {
-			if(go instanceof Player)
-				return true;
-		}
-		
-		return false;
-	}
-	
-	public boolean hasBomb() {
-		for(GridObject go : this) {
-			if(go instanceof Bomb)
-				return true;
-		}
-		return false;
-	}
-	
-	public boolean hasFire() {
-		for(GridObject go : this) {
-			if(go instanceof Fire)
-				return true;
-		}
 		return false;
 	}
 		

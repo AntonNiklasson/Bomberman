@@ -74,7 +74,7 @@ public class Game extends Thread {
 			Tile tile;
 			do {
 				tile = getGrid().getTile(randomizer.nextInt(Grid.COLUMNS), randomizer.nextInt(Grid.ROWS));
-			} while(tile.hasWall() || tile.hasPlayer() || safeTiles.contains(tile));
+			} while(tile.has(Wall.class) || tile.has(Player.class) || safeTiles.contains(tile));
 			
 			
 			GridObjectFactory.addExplodableWall(tile.getX(), tile.getY());
@@ -87,7 +87,7 @@ public class Game extends Thread {
 		do {
 			x = randomizer.nextInt(Grid.COLUMNS);
 			y = randomizer.nextInt(Grid.ROWS);
-		}while(getGrid().getTile(x, y).hasWall() || getGrid().getTile(x, y).hasPlayer());
+		}while(getGrid().getTile(x, y).has(Wall.class) || getGrid().getTile(x, y).has(Player.class));
 		
 		// Add enemies
 		for(int enemyIndex = 0; enemyIndex < 1; enemyIndex++) {
@@ -95,7 +95,7 @@ public class Game extends Thread {
 			Tile tile;
 			do {
 				tile = getGrid().getTile(randomizer.nextInt(Grid.COLUMNS), randomizer.nextInt(Grid.ROWS));
-			} while(tile.hasWall() || tile.hasPlayer() || safeTiles.contains(tile) || !getGrid().tileHasPathToSafeTile(tile, 2));
+			} while(tile.has(Wall.class) || tile.has(Player.class) || safeTiles.contains(tile) || !getGrid().tileHasPathToSafeTile(tile, 2));
 			
 			// Spawn enemy at tile
 			GridObjectFactory.addEnemy(tile.getX(), tile.getY());
