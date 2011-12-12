@@ -25,6 +25,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	
 	// Bomb variables
 	private int bombCapacity = 3;
+	private int bombRange = 5;
 	private ArrayList<Bomb> activeBombs = new ArrayList<Bomb>();
 	
 	private HashMap<Integer, String> keyBindings = new HashMap<Integer, String>();
@@ -97,9 +98,11 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		
 		// Check if we can place a bomb
 		if(activeBombs.size() < bombCapacity && !this.getTile().has(Bomb.class)) {
-			activeBombs.add(
-				GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY())
-			);
+			
+			Bomb bomb = GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
+			bomb.setCellRange(bombRange);
+			activeBombs.add(bomb);
+			
 			return true;
 		} else {
 			return false;
@@ -167,6 +170,13 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	 */
 	public int getBombCapacity() {
 		return bombCapacity;
+	}
+	
+	public void setBombRange(int newRange) {
+		this.bombRange = newRange;
+	}
+	public int getBombRange() {
+		return this.bombRange;
 	}
 	
 	/**

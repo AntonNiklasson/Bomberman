@@ -61,4 +61,8 @@ public class Bomb extends MoveableGridObject {
 
 		this.remove();
 	}
+	
+	public void setCellRange(int newRange) {
+		cellRange = newRange;
+	}
 }
