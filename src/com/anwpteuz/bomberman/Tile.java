@@ -22,6 +22,15 @@ public class Tile extends LinkedList<GridObject> {
 		return positionY;
 	}
 	
+	public boolean hasExplodableWall() {
+		for(GridObject go : this) {
+			if(go instanceof ExplodableWall)
+				return true;
+		}
+		
+		return false;
+	}
+	
 	public boolean hasWall() {
 		for(GridObject go : this) {
 			if(go instanceof Wall)

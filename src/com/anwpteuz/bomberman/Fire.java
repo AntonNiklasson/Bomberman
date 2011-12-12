@@ -30,7 +30,9 @@ public class Fire extends GridObject implements Updateable {
 	
 	private void placeFireChild() {
 		Tile nextTile = getGame().getGrid().nextTile(this.getTile(), this.direction);
-		GridObjectFactory.addFire(nextTile.getX(), nextTile.getY(), direction, range-1);
+		if(nextTile != null) {
+			GridObjectFactory.addFire(nextTile.getX(), nextTile.getY(), direction, range-1);
+		}
 	}
 	
 	@Override

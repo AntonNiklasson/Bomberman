@@ -56,6 +56,16 @@ public class GridObjectFactory {
 	public static Fire addFire(int posX, int posY, Direction dir, int range) {
 		Fire fire = new Fire(game, dir, range);
 		Tile tile = game.getGrid().getTile(posX, posY);
+		
+		if(tile.hasWall()) {
+			if(tile.hasExplodableWall()) {
+				for(GridObject go : tile) {
+					if(go instanceof ExplodableWall) go.remove();
+				}
+			}
+			return null;
+		}
+		
 		tile.add(fire);
 		fire.setTile(tile);
 		
