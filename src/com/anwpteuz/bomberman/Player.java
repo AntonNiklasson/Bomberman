@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class Player extends MoveableGridObject implements KeyEventDispatcher, Updateable {
 
-	private static final String[] colorList = new String[] { "blue", "blue" };
+	private static final String[] colorList = new String[] { "blue", "red" };
 	
 	/**
 	 * The ID of the player should be different for each player.
@@ -25,7 +25,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	private int id;
 	
 	// Image list
-	HashMap<Direction, Image> images = new HashMap<>();
+	HashMap<Direction, Image> images = new HashMap<Direction, Image>();
 	
 	// Bomb variables
 	private int bombCapacity = 3;
