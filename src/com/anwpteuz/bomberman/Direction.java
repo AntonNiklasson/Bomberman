@@ -27,4 +27,19 @@ public enum Direction {
 	public int getY() {
 		return y;
 	}
+	
+	
+	/**
+	 * 
+	 * @return Returns the inverse to the direction.
+	 */
+	public Direction getInverse() {
+		switch(this) {
+		case LEFT: return RIGHT;
+		case RIGHT: return LEFT;
+		case UP: return DOWN;
+		case DOWN: return UP;
+		}
+		return null;
+	}
 }

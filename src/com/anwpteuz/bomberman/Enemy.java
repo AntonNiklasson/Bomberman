@@ -31,6 +31,10 @@ public class Enemy extends MoveableGridObject implements Updateable {
 		GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
 	}
 	
+	/**
+	 * Tries to move the enemy to a neighbor tile.
+	 * This method also drops a bomb if the enemy finds itself to be in a corner.
+	 */
 	public void moveToNextTile() {	
 		Grid grid = getGame().getGrid();
 		ArrayList<Tile> neighbours = grid.getTileNeighbours(getTile());
@@ -47,20 +51,22 @@ public class Enemy extends MoveableGridObject implements Updateable {
 			
 		}
 		
+		// If we are not in a corner, move to a random neighbor.
 		if(neighbours.size() > 1) {
 			do {
 				nextTile = neighbours.get(new Random().nextInt(neighbours.size()));
 			} while(nextTile == prevTile);
 		} else {
-			nextTile = prevTile;
 			
-			if(!nextTile.hasBomb())
+			// We are in a corner. Move to the only neighbor we got.
+			nextTile = neighbours.get(0);
+			
+			if(!this.getTile().hasBomb())
 				this.placeBomb();
 		}
 		
 		if(nextTile != null) {
 			moveTo(nextTile);
-			Log.get().info(nextTile.getX() + " " + nextTile.getY());
 		}
 	}
 	
