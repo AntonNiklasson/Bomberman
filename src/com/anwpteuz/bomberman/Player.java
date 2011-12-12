@@ -115,7 +115,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent e) {
 
-		if(e.getID() != KeyEvent.KEY_PRESSED) return false;
+		if(!this.isAlive() || e.getID() != KeyEvent.KEY_PRESSED) return false;
 		
 		if(keyBindings.containsKey(e.getKeyCode())) {
 			String action = keyBindings.get(e.getKeyCode());
@@ -181,6 +181,18 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 				activeBombs.remove(i);
 				i--;
 			}
+		}
+	}
+	
+	/**
+	 * Override MoveAbleGridObject.moveTo for implementing fire collision detection
+	 */
+	@Override
+	public void moveTo(int toX, int toY) {				
+		super.moveTo(toX, toY);
+		
+		if(getGame().getGrid().getTile(toX, toY).has(Fire.class)) {
+			this.remove();
 		}
 	}
 }
