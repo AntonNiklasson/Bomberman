@@ -42,7 +42,7 @@ public class Enemy extends MoveableGridObject implements Updateable {
 		
 		for(int i = 0; i < neighbours.size(); i++) {
 			Tile neighbour = neighbours.get(i);
-			if(neighbour.hasWall()) {
+			if(neighbour.has(Wall.class)) {
 				neighbours.remove(neighbour);
 				
 				// The order changes when we remove a Tile
@@ -61,7 +61,7 @@ public class Enemy extends MoveableGridObject implements Updateable {
 			// We are in a corner. Move to the only neighbor we got.
 			nextTile = neighbours.get(0);
 			
-			if(!this.getTile().hasBomb())
+			if(!this.getTile().has(Bomb.class))
 				this.placeBomb();
 		}
 		

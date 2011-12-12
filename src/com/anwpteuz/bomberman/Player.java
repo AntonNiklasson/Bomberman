@@ -96,7 +96,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		refreshActiveBombs();
 		
 		// Check if we can place a bomb
-		if(activeBombs.size() < bombCapacity && !this.getTile().hasBomb()) {
+		if(activeBombs.size() < bombCapacity && !this.getTile().has(Bomb.class)) {
 			activeBombs.add(
 				GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY())
 			);
