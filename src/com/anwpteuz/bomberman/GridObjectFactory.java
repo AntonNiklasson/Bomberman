@@ -72,6 +72,16 @@ public class GridObjectFactory {
 		tile.add(fire);
 		fire.setTile(tile);
 		
+		if(tile.hasPlayer()) {
+			for(int i = 0; i < tile.size(); i++) {
+				if(tile.get(i) instanceof Player) {
+					tile.get(i).remove();
+					i--;
+				}
+			}
+		}
+		
+		
 		return fire;
 	}
 }
