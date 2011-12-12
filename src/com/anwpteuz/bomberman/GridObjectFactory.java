@@ -52,4 +52,36 @@ public class GridObjectFactory {
 		
 		return enemy;
 	}
+	
+	public static Fire addFire(int posX, int posY, Direction dir, int range) {
+		Fire fire = new Fire(game, dir, range);
+		Tile tile = game.getGrid().getTile(posX, posY);
+		
+		if(tile.hasWall()) {
+			if(tile.hasExplodableWall()) {
+				for(int i = 0; i < tile.size(); i++) {
+					if(tile.get(i) instanceof ExplodableWall) {
+						tile.get(i).remove();
+						i--;
+					}
+				}
+			}
+			return null;
+		}
+		
+		tile.add(fire);
+		fire.setTile(tile);
+		
+		if(tile.hasPlayer()) {
+			for(int i = 0; i < tile.size(); i++) {
+				if(tile.get(i) instanceof Player) {
+					tile.get(i).remove();
+					i--;
+				}
+			}
+		}
+		
+		
+		return fire;
+	}
 }

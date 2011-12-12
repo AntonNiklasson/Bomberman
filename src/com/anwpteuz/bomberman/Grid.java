@@ -103,6 +103,7 @@ public class Grid extends JPanel {
 		
 		return this.getTile(x, y);
 	}
+
 	
 	/**
 	 * This methods tests if a bomb would be dropped at a tile, would the tile be connected to any other tile that is bomb-safe.

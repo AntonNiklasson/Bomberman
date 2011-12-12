@@ -28,6 +28,7 @@ public enum Direction {
 		return y;
 	}
 	
+	
 	/**
 	 * 
 	 * @return Returns the inverse to the direction.
