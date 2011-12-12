@@ -2,6 +2,7 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
@@ -15,7 +16,7 @@ import java.util.HashMap;
  */
 public class Player extends MoveableGridObject implements KeyEventDispatcher, Updateable {
 
-	private static final Color[] colorList = new Color[] { Color.RED, Color.BLUE };
+	private static final String[] colorList = new String[] { "blue", "blue" };
 	
 	/**
 	 * The ID of the player should be different for each player.
@@ -23,11 +24,16 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	 */
 	private int id;
 	
+	// Image list
+	HashMap<Direction, Image> images = new HashMap<>();
+	
 	// Bomb variables
 	private int bombCapacity = 3;
 	private ArrayList<Bomb> activeBombs = new ArrayList<Bomb>();
 	
 	private HashMap<Integer, String> keyBindings = new HashMap<Integer, String>();
+	
+	private Direction lastMoveDirection = Direction.DOWN;
 	
 	/**
 	 * Creates a new instance of the Player.
@@ -40,9 +46,19 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		this.id = id;
 		defaultKeyBindings();
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(this);
+		
+		// Add images
+		images.put(Direction.RIGHT, AssetsManager.getInstance().loadImage("player_" + getStringColor() + "_right"));
+		images.put(Direction.LEFT, AssetsManager.getInstance().loadImage("player_" + getStringColor() + "_left"));
+		images.put(Direction.UP, AssetsManager.getInstance().loadImage("player_" + getStringColor() + "_up"));
+		images.put(Direction.DOWN, AssetsManager.getInstance().loadImage("player_" + getStringColor() + "_down"));
 	}
 	
-	public Color getColor() {
+	public Image getCurrentImage() {
+		return images.get(lastMoveDirection);
+	}
+	
+	public String getStringColor() {
 		return colorList[id-1];
 	}
 	
@@ -80,10 +96,10 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	 * @return Returns true if a action was found for the specified string.
 	 */
 	protected boolean executeAction(String action) {
-		if(action.equals("move_left")) move(-1, 0);
-		else if(action.equals("move_right")) move(1, 0);
-		else if(action.equals("move_up")) move(0, -1);
-		else if(action.equals("move_down")) move(0, 1);
+		if(action.equals("move_left")) move(Direction.LEFT);
+		else if(action.equals("move_right")) move(Direction.RIGHT);
+		else if(action.equals("move_up")) move(Direction.UP);
+		else if(action.equals("move_down")) move(Direction.DOWN);
 		else if(action.equals("place_bomb")) placeBomb();
 		else if(action.equals("exit_game")) System.exit(0);
 		else return false;
@@ -108,8 +124,8 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(getColor());
-		g.fillOval(getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE);
+		g.drawImage(getCurrentImage(), getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE, null);
+		//g.fillOval(getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE);
 	}
 
 	@Override
@@ -194,5 +210,14 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		if(getGame().getGrid().getTile(toX, toY).has(Fire.class)) {
 			this.remove();
 		}
+	}
+	
+	/**
+	 * Override to get lastest move direction.
+	 */
+	@Override
+	public void move(Direction dir) {
+		lastMoveDirection = dir;
+		super.move(dir);
 	}
 }
