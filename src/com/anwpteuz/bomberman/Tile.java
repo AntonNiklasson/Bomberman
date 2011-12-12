@@ -23,21 +23,27 @@ public class Tile extends LinkedList<GridObject> {
 		return positionY;
 	}
 	
-	public boolean hasWall() {
+	public boolean has(Class<? extends GridObject> c) {
 		for(GridObject go : this) {
-			if(go instanceof Wall)
+			if(c.isAssignableFrom(go.getClass()))
 				return true;
 		}
 		
 		return false;
 	}
-	
-	public boolean hasPlayer() {
-		for(GridObject go : this) {
-			if(go instanceof Player)
-				return true;
-		}
 		
+	/**
+	 * Compares the specified object with this tile for equality.
+	 * Returns true if the tiles position matches and the GridObject collections are equal.
+	 * 
+	 * @see LinkedList#equals(Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if(super.equals(o)) {
+			Tile tile = (Tile)o;
+			return tile.getX() == getX() && tile.getY() == getY();
+		}
 		return false;
 	}
 	

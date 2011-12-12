@@ -5,9 +5,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy extends MoveableGridObject {
+public class Enemy extends MoveableGridObject implements Updateable {
 
 	Tile prevTile;
+	int timer;
 	
 	public Enemy(Game g) {
 		super(g);
@@ -26,30 +27,62 @@ public class Enemy extends MoveableGridObject {
 		);
 	}
 	
+	public void placeBomb() {
+		GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
+	}
 	
+	/**
+	 * Tries to move the enemy to a neighbor tile.
+	 * This method also drops a bomb if the enemy finds itself to be in a corner.
+	 */
 	public void moveToNextTile() {	
 		Grid grid = getGame().getGrid();
 		ArrayList<Tile> neighbours = grid.getTileNeighbours(getTile());
 		Tile nextTile;
 		
-		for(Tile neighbour : neighbours) {
-			if(neighbour.hasWall()) neighbours.remove(neighbour); 
+		for(int i = 0; i < neighbours.size(); i++) {
+			Tile neighbour = neighbours.get(i);
+			if(neighbour.has(Wall.class)) {
+				neighbours.remove(neighbour);
+				
+				// The order changes when we remove a Tile
+				i--;
+			}
+			
 		}
 		
+		// If we are not in a corner, move to a random neighbor.
 		if(neighbours.size() > 1) {
 			do {
 				nextTile = neighbours.get(new Random().nextInt(neighbours.size()));
 			} while(nextTile == prevTile);
 		} else {
-			nextTile = prevTile;
+			
+			// We are in a corner. Move to the only neighbor we got.
+			nextTile = neighbours.get(0);
+			
+			if(!this.getTile().has(Bomb.class))
+				this.placeBomb();
 		}
 		
-		moveTo(nextTile);
+		if(nextTile != null) {
+			moveTo(nextTile);
+		}
 	}
 	
 	@Override
 	public void setTile(Tile tile) {
 		prevTile = getTile();
 		super.setTile(tile);
+	}
+
+	@Override
+	public void update() {
+		timer += Game.targetTime;
+		
+		if(timer >= 500) {
+			timer = 0;
+			moveToNextTile();
+		}
 	}
 }
