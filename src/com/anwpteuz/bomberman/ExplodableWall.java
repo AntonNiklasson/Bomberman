@@ -2,6 +2,7 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 /**
  * 
@@ -27,5 +28,16 @@ public class ExplodableWall extends Wall {
 				Grid.CELL_SIZE - (2 * padding),
 				Grid.CELL_SIZE - (2 * padding)
 		);
+	}
+	
+	@Override
+	public void remove() {
+		if(new Random().nextInt(5) == 0) {
+			PowerupBombRange pubr = new PowerupBombRange(getGame());
+			this.getTile().add(pubr);
+			pubr.setTile(this.getTile());
+		}
+		
+		super.remove();
 	}
 }

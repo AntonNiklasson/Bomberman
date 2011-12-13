@@ -20,17 +20,4 @@ public abstract class Powerup extends StaticGridObject {
 	 * @param player The player to apply the powerup effect to.
 	 */
 	public abstract void applyTo(Player player);
-	
-	@Override
-	public void paint(Graphics g) {
-		g.setColor(Color.ORANGE);
-		
-		int padding = 5;
-		g.fillOval(
-				getTile().getX()*Grid.CELL_SIZE + padding,
-				getTile().getY()*Grid.CELL_SIZE + padding,
-				Grid.CELL_SIZE + 2*padding,
-				Grid.CELL_SIZE + 2*padding
-		);
-	}
 }

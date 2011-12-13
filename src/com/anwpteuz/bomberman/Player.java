@@ -201,8 +201,14 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	public void moveTo(int toX, int toY) {				
 		super.moveTo(toX, toY);
 		
+		// Die if tile has fire
 		if(getGame().getGrid().getTile(toX, toY).has(Fire.class)) {
 			this.remove();
+		}
+		
+		// Apply powerups if there's any
+		if(getGame().getGrid().getTile(toX, toY).has(Powerup.class)) {
+			
 		}
 	}
 }
