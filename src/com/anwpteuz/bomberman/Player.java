@@ -125,7 +125,6 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(getCurrentImage(), getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE, null);
-		//g.fillOval(getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE);
 	}
 
 	@Override
@@ -213,7 +212,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	}
 	
 	/**
-	 * Override to get lastest move direction.
+	 * Override to get latest move direction.
 	 */
 	@Override
 	public void move(Direction dir) {
