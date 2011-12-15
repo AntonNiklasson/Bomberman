@@ -195,7 +195,9 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	}
 	
 	/**
-	 * Override MoveAbleGridObject.moveTo for implementing fire collision detection
+	 * Override MoveAbleGridObject.moveTo for implementing the following:
+	 * - Checks for Fire collisions and dies in case of fire in next tile.
+	 * - Checks for Powerups, and applies them accordingly.
 	 */
 	@Override
 	public void moveTo(int toX, int toY) {				
