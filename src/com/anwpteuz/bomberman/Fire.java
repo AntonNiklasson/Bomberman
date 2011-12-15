@@ -2,6 +2,8 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Fire extends GridObject implements Updateable {
@@ -13,6 +15,10 @@ public class Fire extends GridObject implements Updateable {
 	private int millisSpreadTime = 200;
 	private boolean isParent;
 	private Color color = (new Random().nextInt(2) == 0) ? Color.RED : Color.YELLOW;
+	
+	// Images
+	private ArrayList<Image> images = new ArrayList<Image>();
+	private Image currentImage;
 	
 	/**
 	 * 
@@ -26,6 +32,16 @@ public class Fire extends GridObject implements Updateable {
 		
 		this.range  = range;
 		this.direction = dir;
+		
+		// Add images
+		images.add(AssetsManager.getInstance().loadImage("fire_1"));
+		images.add(AssetsManager.getInstance().loadImage("fire_2"));
+		images.add(AssetsManager.getInstance().loadImage("fire_3"));
+		images.add(AssetsManager.getInstance().loadImage("fire_4"));
+		images.add(AssetsManager.getInstance().loadImage("fire_5"));
+		
+		// Set first image
+		currentImage = images.get(0);
 	}
 	
 	private void placeFireChild() {
@@ -37,16 +53,7 @@ public class Fire extends GridObject implements Updateable {
 	
 	@Override
 	public void paint(Graphics g) {
-		
-		g.setColor(color);
-		
-		int padding = 13;
-		g.fillRect(
-				getTile().getX()*Grid.CELL_SIZE + padding,
-				getTile().getY()*Grid.CELL_SIZE + padding,
-				Grid.CELL_SIZE - (2 * padding),
-				Grid.CELL_SIZE - (2 * padding)
-		);
+		g.drawImage(currentImage, getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE, null);
 	}
 
 	@Override
@@ -67,5 +74,9 @@ public class Fire extends GridObject implements Updateable {
 		if(millisLived >= millisLifetime)
 			this.getTile().remove(this);
 		
+		float time = (millisLived / (float)millisLifetime);
+		int imageIndex = (int)(time * images.size());
+		if(time > 0.5f) imageIndex = images.size() - imageIndex;
+		currentImage = images.get(imageIndex);
 	}
 }
