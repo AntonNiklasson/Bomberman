@@ -25,7 +25,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	
 	// Bomb variables
 	private int bombCapacity = 3;
-	private int bombRange = 5;
+	private int bombRange = 2;
 	private ArrayList<Bomb> activeBombs = new ArrayList<Bomb>();
 	
 	private HashMap<Integer, String> keyBindings = new HashMap<Integer, String>();
@@ -201,14 +201,22 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	public void moveTo(int toX, int toY) {				
 		super.moveTo(toX, toY);
 		
+		Tile nextTile = getGame().getGrid().getTile(toX, toY);
+		
 		// Die if tile has fire
-		if(getGame().getGrid().getTile(toX, toY).has(Fire.class)) {
+		if(nextTile.has(Fire.class)) {
 			this.remove();
 		}
 		
 		// Apply powerups if there's any
-		if(getGame().getGrid().getTile(toX, toY).has(Powerup.class)) {
-			
+		if(nextTile.has(Powerup.class)) {
+			for(GridObject go : nextTile) {
+				if(go instanceof Powerup) {
+					((Powerup) go).applyTo(this);
+					Log.get().info("Powerup applied to " + this.id);
+					go.remove();
+				}
+			}
 		}
 	}
 }

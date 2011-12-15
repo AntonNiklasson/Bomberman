@@ -11,7 +11,7 @@ public class PowerupBombRange extends Powerup {
 	}
 
 	public void applyTo(Player player) {
-		player.setBombRange(player.getBombRange());
+		player.setBombRange(player.getBombRange() + 1);
 	}
 	
 	@Override
