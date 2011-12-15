@@ -6,27 +6,27 @@ import java.awt.Image;
 
 
 /**
- * This powerup will increase the players bombRange by 1
+ * This powerup will increase the players bombCapacity by 1
  * for each powerup taken.
  * 
  * @author antonniklasson
  *
  */
-public class PowerupBombRange extends Powerup {
+public class PowerupBombCapacity extends Powerup {
 
 	private Image image;
 	
 	
-	public PowerupBombRange(Game g) {
+	public PowerupBombCapacity(Game g) {
 		super(g);
-		image = AssetsManager.getInstance().loadImage("powerup_bombrange");
+		image = AssetsManager.getInstance().loadImage("powerup_bombcapacity");
 	}
 
 	/**
-	 * Run this method to acctually apply the powerup on givn Player
+	 * Run this method to acctually apply the powerup on given Player
 	 */
 	public void applyTo(Player player) {
-		player.setBombRange(player.getBombRange() + 1);
+		player.setBombCapacity(player.getBombCapacity() + 1);
 	}
 	
 	/**

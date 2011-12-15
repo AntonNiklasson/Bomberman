@@ -42,8 +42,14 @@ public class ExplodableWall extends Wall {
 	
 	@Override
 	public void remove() {
-		if(new Random().nextInt(5) == 0) {
+		int random = new Random().nextInt(7);
+		
+		if(random == 0) {
 			PowerupBombRange pubr = new PowerupBombRange(getGame());
+			this.getTile().add(pubr);
+			pubr.setTile(this.getTile());
+		} else if(random == 1) {
+			PowerupBombCapacity pubr = new PowerupBombCapacity(getGame());
 			this.getTile().add(pubr);
 			pubr.setTile(this.getTile());
 		}
