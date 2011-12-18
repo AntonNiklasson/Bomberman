@@ -11,7 +11,7 @@ public abstract class MoveableGridObject extends GridObject {
 		super(g);
 	}
 	
-	public void move(int toX, int toY) {
+	public void moveTo(int toX, int toY) {
 		if(canMoveTo(toX, toY)) {
 			this.getTile().remove(this);
 			Tile tile = getGame().getGrid().getTile(toX, toY);
@@ -20,7 +20,19 @@ public abstract class MoveableGridObject extends GridObject {
 		}
 	}
 	
+	public void moveTo(Tile tile) {
+		moveTo(tile.getX(), tile.getY());
+	}
+	
+	public void move(Direction dir) {
+		move(dir.getX(), dir.getY());
+	}
+	
+	public void move(int x, int y) {
+		this.moveTo(getTile().getX()+x, getTile().getY()+y);
+	}
+	
 	public boolean canMoveTo(int toX, int toY) {
-		return !getGame().getGrid().getTile(toX, toY).hasWall();
+		return !getGame().getGrid().getTile(toX, toY).has(Wall.class);
 	}
 }
