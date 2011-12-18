@@ -1,6 +1,7 @@
 package com.anwpteuz.bomberman;
 
 import java.util.LinkedList;
+import java.util.WeakHashMap;
 
 public class Tile extends LinkedList<GridObject> {
 	/**
@@ -44,5 +45,11 @@ public class Tile extends LinkedList<GridObject> {
 			return tile.getX() == getX() && tile.getY() == getY();
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean add(GridObject e) {
+		
+		return super.add(e);
 	}
 }

@@ -55,6 +55,10 @@ public class Bomb extends MoveableGridObject implements Updateable {
 
 		this.remove();
 	}
+	
+	public void setCellRange(int newRange) {
+		cellRange = newRange;
+	}
 
 	/**
 	 * Handles when to explode and also what image to paint.

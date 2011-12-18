@@ -29,6 +29,7 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	
 	// Bomb variables
 	private int bombCapacity = 3;
+	private int bombRange = 2;
 	private ArrayList<Bomb> activeBombs = new ArrayList<Bomb>();
 	
 	private HashMap<Integer, String> keyBindings = new HashMap<Integer, String>();
@@ -113,9 +114,11 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		
 		// Check if we can place a bomb
 		if(activeBombs.size() < bombCapacity && !this.getTile().has(Bomb.class)) {
-			activeBombs.add(
-				GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY())
-			);
+			
+			Bomb bomb = GridObjectFactory.addBomb(this.getTile().getX(), this.getTile().getY());
+			bomb.setCellRange(bombRange);
+			activeBombs.add(bomb);
+			
 			return true;
 		} else {
 			return false;
@@ -184,6 +187,13 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 		return bombCapacity;
 	}
 	
+	public void setBombRange(int newRange) {
+		this.bombRange = newRange;
+	}
+	public int getBombRange() {
+		return this.bombRange;
+	}
+	
 	/**
 	 * Refreshes the {@link Player#activeBombs}. Removes dead bombs.
 	 */
@@ -200,14 +210,30 @@ public class Player extends MoveableGridObject implements KeyEventDispatcher, Up
 	}
 	
 	/**
-	 * Override MoveAbleGridObject.moveTo for implementing fire collision detection
+	 * Override MoveAbleGridObject.moveTo for implementing the following:
+	 * - Checks for Fire collisions and dies in case of fire in next tile.
+	 * - Checks for Powerups, and applies them accordingly.
 	 */
 	@Override
 	public void moveTo(int toX, int toY) {				
 		super.moveTo(toX, toY);
 		
-		if(getGame().getGrid().getTile(toX, toY).has(Fire.class)) {
+		Tile nextTile = getGame().getGrid().getTile(toX, toY);
+		
+		// Die if tile has fire
+		if(nextTile.has(Fire.class)) {
 			this.remove();
+		}
+		
+		// Apply powerups if there's any
+		if(nextTile.has(Powerup.class)) {
+			for(GridObject go : nextTile) {
+				if(go instanceof Powerup) {
+					((Powerup) go).applyTo(this);
+					Log.get().info("Powerup applied to " + this.id);
+					go.remove();
+				}
+			}
 		}
 	}
 	
