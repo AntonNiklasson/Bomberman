@@ -2,7 +2,9 @@ package com.anwpteuz.bomberman;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Enemy extends MoveableGridObject implements Updateable {
@@ -10,21 +12,28 @@ public class Enemy extends MoveableGridObject implements Updateable {
 	Tile prevTile;
 	int timer;
 	
+	// Image list
+	HashMap<Direction, Image> images = new HashMap<Direction, Image>();
+	
+	private Direction lastMoveDirection = Direction.DOWN;
+	
 	public Enemy(Game g) {
 		super(g);
+		
+		// Add images
+		images.put(Direction.RIGHT, AssetsManager.getInstance().loadImage("enemy_right"));
+		images.put(Direction.LEFT, AssetsManager.getInstance().loadImage("enemy_left"));
+		images.put(Direction.UP, AssetsManager.getInstance().loadImage("enemy_up"));
+		images.put(Direction.DOWN, AssetsManager.getInstance().loadImage("enemy_down"));
+	}
+	
+	public Image getCurrentImage() {
+		return images.get(lastMoveDirection);
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.YELLOW);
-		
-		int padding = 3;
-		g.fillRect(
-				getTile().getX()*Grid.CELL_SIZE + padding,
-				getTile().getY()*Grid.CELL_SIZE + padding,
-			 	Grid.CELL_SIZE - 2*padding,
-				Grid.CELL_SIZE - 2*padding
-		);
+		g.drawImage(getCurrentImage(), getTile().getX()*Grid.CELL_SIZE, getTile().getY()*Grid.CELL_SIZE, Grid.CELL_SIZE, Grid.CELL_SIZE, null);
 	}
 	
 	public void placeBomb() {
@@ -84,5 +93,14 @@ public class Enemy extends MoveableGridObject implements Updateable {
 			timer = 0;
 			moveToNextTile();
 		}
+	}
+	
+	/**
+	 * Override to get lastest move direction.
+	 */
+	@Override
+	public void move(Direction dir) {
+		lastMoveDirection = dir;
+		super.move(dir);
 	}
 }
