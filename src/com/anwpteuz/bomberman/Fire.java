@@ -75,8 +75,9 @@ public class Fire extends GridObject implements Updateable {
 			this.getTile().remove(this);
 		
 		float time = (millisLived / (float)millisLifetime);
-		int imageIndex = (int)(time * images.size());
+		int imageIndex = (int)(time * images.size() * 2);
 		if(time > 0.5f) imageIndex = images.size() - imageIndex;
+		if(imageIndex < 0) imageIndex = 0;
 		currentImage = images.get(imageIndex);
 	}
 }
