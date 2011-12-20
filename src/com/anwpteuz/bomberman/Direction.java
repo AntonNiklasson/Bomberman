@@ -1,5 +1,6 @@
 package com.anwpteuz.bomberman;
 
+
 public enum Direction {
 	
 	LEFT(-1, 0),

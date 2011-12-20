@@ -1,5 +1,11 @@
 package com.anwpteuz.bomberman;
 
+
+/**
+ * Add GridObjects to tiles
+ * @author antonniklasson
+ *
+ */
 public class GridObjectFactory {
 	
 	private static Game game;

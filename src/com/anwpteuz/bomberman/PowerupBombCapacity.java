@@ -7,8 +7,7 @@ import java.awt.Image;
 
 /**
  * This powerup will increase the players bombCapacity by 1
- * for each powerup taken.
- * 
+ * for each powerup taken
  * @author antonniklasson
  *
  */

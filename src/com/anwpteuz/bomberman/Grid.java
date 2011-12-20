@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
+/**
+ * The game grid. It is a 2D array of Tiles.
+ * @author antonniklasson
+ *
+ */
 public class Grid extends JPanel {
 	/**
 	 * Generated uid

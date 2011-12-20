@@ -8,7 +8,6 @@ import java.awt.Image;
 /**
  * This powerup will increase the players bombRange by 1
  * for each powerup taken.
- * 
  * @author antonniklasson
  *
  */

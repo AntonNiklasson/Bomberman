@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ * Players are controlled by actual users.
+ * Player one: Arrows + Space for bomb
+ * Player two: WASD + Q for bomb
  * 
  * @author antonniklasson
  *

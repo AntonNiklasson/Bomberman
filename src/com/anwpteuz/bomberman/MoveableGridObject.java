@@ -1,7 +1,7 @@
 package com.anwpteuz.bomberman;
 
 /**
- * 
+ * Every GridObject which has the ability to move between tiles
  * @author antonniklasson
  *
  */

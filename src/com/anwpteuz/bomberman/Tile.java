@@ -3,6 +3,11 @@ package com.anwpteuz.bomberman;
 import java.util.LinkedList;
 import java.util.WeakHashMap;
 
+/**
+ * Our grid is built of Tiles. Each tile can contain instances of GridObject. Tile extends LinkedList
+ * @author antonniklasson
+ *
+ */
 public class Tile extends LinkedList<GridObject> {
 	/**
 	 * Generated UID

@@ -5,7 +5,8 @@ import java.awt.Image;
 import java.util.ArrayList;
 
 /**
- * 
+ * Bombs are added to Tiles when Players, and Enemies place them there.
+ * Standard time until explosion is 3 sec.
  * @author antonniklasson
  *
  */

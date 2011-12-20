@@ -3,6 +3,11 @@ package com.anwpteuz.bomberman;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Allows logging in console.
+ * @author antonniklasson
+ *
+ */
 public class Log {
 	
 	private static Log instance;

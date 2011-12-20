@@ -6,6 +6,13 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/**
+ * This gets added to surrounding tiles when a bomb explodes. It will spread across the grid
+ * as long as it does not hit a wall object, and as long as the range > 0. 
+ * @author antonniklasson
+ *
+ */
 public class Fire extends GridObject implements Updateable {
 	
 	private int range;

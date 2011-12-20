@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * The Powerup class should be the super class for every different type of powerup on the 
+ * The Powerup class should be the super class for every different type of powerup in the game 
  * @author Matteus
  *
  */

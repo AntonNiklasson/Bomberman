@@ -6,7 +6,8 @@ import java.awt.Image;
 import java.util.Random;
 
 /**
- * 
+ * ExplodableWall will explode add dissapear when fire "touch" them. Some ExplodableWall objects
+ * will give Players upgrades.
  * @author antonniklasson
  *
  */

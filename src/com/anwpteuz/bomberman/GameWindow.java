@@ -5,6 +5,12 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+
+/**
+ * The window containing our game grid.
+ * @author antonniklasson
+ *
+ */
 public class GameWindow extends JFrame {
 	
 	/**

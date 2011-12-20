@@ -3,7 +3,7 @@ package com.anwpteuz.bomberman;
 import java.awt.Graphics;
 
 /**
- * 
+ * GridObjects are generally visual objects in the game grid.
  * @author antonniklasson
  *
  */

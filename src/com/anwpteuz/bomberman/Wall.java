@@ -13,6 +13,10 @@ public class Wall extends StaticGridObject {
 
 	private Image image;
 	
+	/**
+	 * Create a new wall. Load sprite via AssetsManager
+	 * @param g
+	 */
 	public Wall(Game g) { 
 		super(g);
 		image = AssetsManager.getInstance().loadImage("wall");

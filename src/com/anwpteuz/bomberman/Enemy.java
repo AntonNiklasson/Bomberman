@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+
+/**
+ * Enemy moves randomly across the grid and places bombs whenever he hits a dead end.
+ * @author antonniklasson
+ *
+ */
 public class Enemy extends MoveableGridObject implements Updateable {
 
 	Tile prevTile;
